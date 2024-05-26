@@ -1,0 +1,72 @@
+<h2 class="text-center"> <b>Lernmodus-Einstellungen</b> </h2>
+
+<div class="container">
+
+    <form class="form"
+        #f="ngForm" 
+        (ngSubmit)="onSubmit(f)"
+    >
+
+        <!-- Fragentyp -->
+        <div 
+            class="form-group"
+            [ngClass]="{'has-error': aktFragenTypId == null}"
+        >
+            <label class="col-sm-4 control-label" for="select-fragenTyp">Wählen Sie Fragentyp aus: </label>
+            <select 
+                class="form-control" 
+                id="select-fragenTyp"
+                [(ngModel)]="aktFragenTypId"
+                name="aktFragenTypId"
+                required
+            >
+                <option
+                    *ngFor="let ft of fragenTypen"
+                    [value]="ft.id"
+                >
+                    {{ ft.name }}
+                </option>
+            </select>
+            <span
+                *ngIf="aktFragenTypId == null"
+                class="form-help-text"
+            >
+                Das Feld muss ausgefüllt sein und der Wert muss mindestens 5 sein.
+            </span>
+        </div>
+
+        <!-- Fragenanzahl -->
+        <div 
+            class="form-group"
+            [ngClass]="{'has-error': fragenAnzahl.invalid && fragenAnzahl.touched}"
+        >
+            <label class="col-sm-4 control-label" for="fragenAnzahl">Fragenanzahl: </label>
+            <input 
+                type="number"
+                class="form-control" 
+                id="fragenAnzahl"
+                #fragenAnzahl="ngModel"
+                name="fragenAnzahl"
+                [ngModel]="5"
+                min="5"
+                required
+            >
+            <span
+                *ngIf="fragenAnzahl.invalid && fragenAnzahl.touched"
+                class="form-help-text"
+            >
+                Das Feld muss ausgefüllt sein und der Wert muss mindestens 5 sein.
+            </span>
+        </div>
+        
+        <!-- Navigation -->
+        <button
+            type="submit"
+            class="btn btn-primary btn-lg btn-block"
+            [disabled]="f.invalid"
+        >
+            Zum Lernmodus
+        </button>
+    </form>
+
+</div>

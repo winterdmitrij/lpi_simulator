@@ -1,0 +1,11 @@
+.fehler {
+    color: darkred;
+}
+
+.richtig {
+    color: darkgreen;
+}
+
+p {
+    font: 1.3em sans-serif;
+}

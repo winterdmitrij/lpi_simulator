@@ -1,0 +1,99 @@
+<h2 class="text-center"> <b>Auswertung</b> </h2>
+
+<!-- Message -->
+<div class="container bg-warning"
+    *ngIf="error"
+>
+    <h4 class="text-center"
+    [ngClass]="{fehler:true}"
+    >
+        Es fehlt noch an Daten. Gehen Sie zuerst zum Prüfmodus!
+    </h4>
+</div>
+
+
+<!-- Ergebnis -->
+<div class="container bg-success">
+    <hr>
+    <h3 class="text-center"><b>Ergebnis</b></h3>
+    <h4 class="text-center">Gesamtzahl von Fragen: {{ userAntworten.length }} </h4>
+    <h5 class="text-center">Richtig beantwotet: {{ richtig }} </h5>
+    <h5 class="text-center">Falsch beantwotet: {{ falsch }} </h5>
+    <h5 class="text-center">Unbeantwortet: {{ unbeantworten }} </h5>
+    <h4 class="text-center">erzielte Punkte: <b>{{ punkten }} aus 800</b></h4>
+    <h4 class="text-center">Ergebnis: <b>{{ ergebnis }}</b></h4>
+    <hr>
+</div>
+
+<!-- Fragenübersicht -->
+<div class="container bg-info">
+    <hr>
+    <h3 class="text-center"><b>Fragenübersicht</b></h3>
+    <hr>
+    
+    <!-- Header -->
+    <div class="row">
+        <div class="col-md-8">
+            <h5 class="text-center"><b>Frage</b></h5>
+        </div>
+        <div class="col-md-4">
+            <h5 class="text-center"><b>Antwort</b></h5>
+        </div>
+    </div>
+    <hr>
+
+    <!-- Tabelle -->
+    <div class="row" *ngFor="let antwort of userAntworten">
+        <div class="col-md-8"
+            *ngIf="antwort.istBeantwortet && antwort.istRichtig"
+            [ngClass]="{richtig:true}"
+        >
+            <p>{{ antwort.frageId }}</p>
+        </div>
+
+        <div class="col-md-8"
+            *ngIf="antwort.istBeantwortet && !antwort.istRichtig"
+            [ngClass]="{fehler:true}"
+        >
+            <p>{{ antwort.frageId }}</p>
+        </div>
+
+        <div class="col-md-8"
+            *ngIf="!antwort.istBeantwortet"
+        >
+            <p>{{ antwort.frageId }}</p>
+        </div>
+
+
+        <div class="col-md-4 text-center"
+            *ngIf="antwort.istBeantwortet && antwort.istRichtig"
+            [ngClass]="{richtig:true}"
+        >
+            <p><b>Richtig</b></p>
+        </div>
+
+        <div class="col-md-4 text-center"
+            *ngIf="antwort.istBeantwortet && !antwort.istRichtig"
+            [ngClass]="{fehler:true}"
+        >
+            <p><b>Falsch</b></p>
+        </div>
+
+        <div class="col-md-4 text-center"
+            *ngIf="!antwort.istBeantwortet"
+        >
+            <p><b>Unbeantwortet</b></p>
+        </div>
+    
+    </div>
+
+</div>
+
+
+<!-- Navigation -->
+<div class="container">
+    <hr>
+    <button class="btn btn-info" (click)="home()">
+        Home
+    </button>
+</div>
