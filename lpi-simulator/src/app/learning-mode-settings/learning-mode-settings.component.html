@@ -1,0 +1,64 @@
+<h2 class="text-center"> <b>Lernmodus-Einstellungen</b> </h2>
+
+<div class="container">
+
+    <form class="form"
+        #f="ngForm" 
+        (ngSubmit)="onSubmit(f)"
+    >
+
+        <!-- questionType -->
+        <div 
+            class="form-group"
+            [ngClass]="{'has-error': curQuestionTypeId == null}"
+        >
+            <label class="col-sm-4 control-label" for="select-questionType">Wählen Sie Fragentypen aus: </label>
+            <select 
+                class="form-select form-select-lg mb-3" aria-label=".form-select-lg example"
+                id="select-questionType"
+                [(ngModel)]="curQuestionTypeId"
+                name="curQuestionTypeId"
+                required
+            >
+                <option
+                    *ngFor="let qt of questionTypes"
+                    [value]="qt.id"
+                >
+                    {{ qt.name }}
+                </option>
+            </select>
+        </div>
+
+        <!-- Fragenanzahl -->
+        <div 
+            class="form-group"
+            [ngClass]="{'has-error': questionNumber === null}"
+        >
+            <label class="col-sm-4 control-label" for="questionNumber">Fragenanzahl: </label>
+            <select 
+                class="form-select form-select-lg mb-3" aria-label=".form-select-lg example"
+                id="select-questionNumber"
+                [(ngModel)]="curQuestionNumber"
+                name="curQuestionNumber"
+                required
+            >
+                <option
+                    *ngFor="let qn of questionNumbers"
+                    [value]="qn"
+                >
+                    {{ qn }}
+                </option>
+            </select>
+        </div>
+        
+        <!-- Navigation -->
+        <button
+            type="submit"
+            class="btn btn-primary btn-lg btn-block"
+            [disabled]="f.invalid"
+        >
+            Zum Lernmodus
+        </button>
+    </form>
+
+</div>

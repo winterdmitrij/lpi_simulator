@@ -24,7 +24,7 @@ export interface UserAnswer {
     isRight: boolean
 }
 
-export interface questionType {
+export interface QuestionType {
     name: string,
     id: string
 }

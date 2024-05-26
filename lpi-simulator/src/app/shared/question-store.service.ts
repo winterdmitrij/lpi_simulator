@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Observable } from 'rxjs';
-import { Question, questionType } from "./question";
+import { Question, QuestionType } from "./question";
 
 
 @Injectable({
@@ -8,7 +8,11 @@ import { Question, questionType } from "./question";
 })
 export class QuestionStoreService {
     questions: Question[];
-    questionTypes: questionType[];
+    questionTypes: QuestionType[];
+    questionNumber: number = 15;
+    questionTypeId: string = 'ALL';
+    questionNumbers: number[];
+
 
     constructor () {
         this.questionTypes = [
@@ -18,8 +22,9 @@ export class QuestionStoreService {
             {name: "Alle Fragentypen", id: "ALL"},
         ];
         
-        this.questions = [
-        ]
+        this.questionNumbers = [10, 20, 30, 40, 50, 60];
+
+        this.questions = [];
     }
 
 // Prozeduren
@@ -28,13 +33,21 @@ export class QuestionStoreService {
         return this.questionTypes;
     }
 
-/*    // bekommen FrTyp und -Anzahl aus LMEinst.
-    getFragenTyp(inQuestionType: string): string {
-        return this.questionTypes = inQuestionType;
+    // Gibt alle Fragenmengen zurück
+    getAllQuestionNumbers() {
+        return this.questionNumbers;
     }
-*/
 
-    // Gibt alle Fragen zurück
+    // Gibt notwendige Fragentyp zurück
+    getQuestionTypeId(inQuestionTypeId: string): string {
+        return this.questionTypeId = inQuestionTypeId;
+    }
+
+    getQuestionNumber(inQuestionNumber: number): number {
+        return this.questionNumber = inQuestionNumber;
+    }
+
+// Gibt alle Fragen zurück
     getAllQuestions() {
         return this.questions;
     }

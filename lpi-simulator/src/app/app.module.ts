@@ -5,15 +5,25 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { QuestionStoreService } from './shared/question-store.service';
+import { LearningModeSettingsComponent } from './learning-mode-settings/learning-mode-settings.component';
+import { LearningModeComponent } from './learning-mode/learning-mode.component';
+import { PartialExamModeComponent } from './partial-exam-mode/partial-exam-mode.component';
+import { FullExamModeComponent } from './full-exam-mode/full-exam-mode.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    LearningModeSettingsComponent,
+    LearningModeComponent,
+    PartialExamModeComponent,
+    FullExamModeComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [QuestionStoreService],
   bootstrap: [AppComponent]
