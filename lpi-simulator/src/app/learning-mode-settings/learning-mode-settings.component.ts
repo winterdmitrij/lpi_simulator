@@ -26,7 +26,7 @@ export class LearningModeSettingsComponent {
   ) { }
 
   ngOnInit(): void {
-    // Arrays aus Fragentypen und Mengen
+    // Arrays aus Fragentypen und Mengen erhalten
     this.questionTypes = this.qss.getAllQuestionTypes();
     this.questionNumbers = this.qss.getAllQuestionNumbers();
 
@@ -37,25 +37,23 @@ export class LearningModeSettingsComponent {
   }
 
 
-
-  // Schickt FrTyp und -Anzahl nach FrService und leitet zum Lernmodus weiter
   onSubmit(form: NgForm) {
-    // console.log('Form: ', form);
-    // console.log('Value: ', form.value);
-
+    // Validierung, ist eigentlich unnötig
     let {curQuestionTypeId, questionNumber} = form.value;
     if (questionNumber == 0) questionNumber = 5;
     if (questionNumber < 0) questionNumber *= -1;
-
+    
     if (curQuestionTypeId == null) curQuestionTypeId = 'ALL'
-
-
+    
+    // Werte ablesen
     this.qss.getQuestionTypeId(curQuestionTypeId);
     this.qss.getQuestionNumber(questionNumber);
     
-    // Werten-Prüfiung
+    // Werten-Prüfung
+    // console.log('Form: ', form);
     //console.log(form.value);
 
+    // Routing
     this.router.navigate(['', 'lerning']);
   }
 

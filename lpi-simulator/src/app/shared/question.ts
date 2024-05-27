@@ -1,18 +1,20 @@
 export interface Question {
     questionId: string,
-    questionType?: string,
+    questionTypeId: string,
     questionText: string,
     answers?: Answer[],
-    answer?: FIanswer,
+    answer?: FIanswer,  // ToDo: Löschen
     help?: string
 }
 
+// ToDo: was ist givenAnswer?
 export interface Answer {
     answerText: string,
     givenAnswer?: boolean,
-    isRight: boolean
+    isCorrect: boolean
 }
 
+// ToDo: Löschen
 export interface FIanswer {
     answerText: string[],
     givenAnswer?: string
@@ -21,7 +23,7 @@ export interface FIanswer {
 export interface UserAnswer {
     questionId: string,
     isAnswered?: boolean,
-    isRight: boolean
+    isCorrect: boolean
 }
 
 export interface QuestionType {
