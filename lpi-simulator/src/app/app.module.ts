@@ -9,7 +9,9 @@ import { LearningModeSettingsComponent } from './learning-mode-settings/learning
 import { LearningModeComponent } from './learning-mode/learning-mode.component';
 import { PartialExamModeComponent } from './partial-exam-mode/partial-exam-mode.component';
 import { FullExamModeComponent } from './full-exam-mode/full-exam-mode.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { QuestionsService } from './services/questions.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -22,10 +24,15 @@ import { FormsModule } from '@angular/forms';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
+    ReactiveFormsModule,
     FormsModule
   ],
-  providers: [QuestionStoreService],
+  providers: [
+    QuestionStoreService,
+    QuestionsService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

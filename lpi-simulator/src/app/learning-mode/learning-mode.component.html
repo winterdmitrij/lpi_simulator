@@ -5,18 +5,18 @@
     <div class="row">
         <div class="col-md-8 bg-info">
             <div>
-                <h6> <b>Frage Nr. {{ curQuestion?.questionId }}</b> </h6>
+                <h6> <b>Frage Nr. {{ curQuestion.questionId }}</b> </h6>
             </div>
             <div>
-                <p style="font-size: 1.3rem;">{{ curQuestion?.questionText }}</p>
+                <p style="font-size: 1.3rem;">{{ curQuestion.questionText }}</p>
             </div>
         </div>
         <div class="col-md-4 bg-success">
             <h6 class="text-center"> <b>INFORMATION</b> </h6>
             <p class="text-center">Frage {{ curQuestionNumber + 1 }} / {{ questions.length }} </p>
-            <p class="text-center">Falsch beantwortet: {{ incorrectNum }} / {{ questions.length }} </p>
-            <p class="text-center">Richtig beantwortet: {{ correctNum }} / {{ questions.length }} </p>
-            <p class="text-center">Unbeantwortet: {{ unansweredNum }} / {{ questions.length }} </p>
+            <p class="text-center">Falsch beantwortet: {{ numOfUncorrect }} / {{ questions.length }} </p>
+            <p class="text-center">Richtig beantwortet: {{ numOfCorrect }} / {{ questions.length }} </p>
+            <p class="text-center">Unbeantwortet: {{ numOfUnanswered }} / {{ questions.length }} </p>
         </div>
     </div>
 </div>
@@ -57,39 +57,18 @@
                 <span *ngIf="exam">
                     <input  type="radio" name="a.givenAnswer" *ngIf="a.givenAnswer" checked>
                     <input  type="radio" name="a.givenAnswer" *ngIf="!a.givenAnswer" unchecked (click)="deleteAnswer(); a.givenAnswer=!a.givenAnswer">
-                    <span *ngIf="a.isCorrect" [ngClass]="{correctNum:true}">{{a.answerText}} </span>
-                    <span *ngIf="!a.isCorrect && a.givenAnswer" [ngClass]="{fehler:true}">{{a.answerText}}</span>
+                    <span *ngIf="a.isCorrect" [ngClass]="{correct:true}">{{a.answerText}} </span>
+                    <span *ngIf="!a.isCorrect && a.givenAnswer" [ngClass]="{incorrect:true}">{{a.answerText}}</span>
                     <span *ngIf="!a.isCorrect && !a.givenAnswer">{{a.answerText}}</span>
                 </span>
             </div>
         </div>
-
-         <!-- FIF-->
-         <!-- ToDo: Löschen
-        <div *ngIf="curQuestion.questionTypeId==='FI'">
-            <span *ngIf="!exam">
-                <label>Ihre Antwort: </label>
-                <input type="text" [(ngModel)]="curQuestion.antwort.givenAnswer">
-            </span>
-            
-            <span *ngIf="exam">
-                <label>Ihre Antwort: </label>
-                <input type="text" 
-                    class="{{antwClass()}}"
-                    [(ngModel)]="curQuestion.antwort.givenAnswer">
-                <br>
-                <span class="correctNum"><b>Eine der richtigen Antworten ist: {{curQuestion.antwort.answerText[0]}} </b></span>
-            </span>
-           
-        </div>
-        <br>
-        -->
 </div>
 <hr>
 
 <!-- Hilfe -->
 <div class="container bg-info" *ngIf="show">
-    <p>{{ curQuestion?.help }} </p>
+    <p>{{ curQuestion.help }} </p>
 </div>
 
 
@@ -98,7 +77,7 @@
     <button class="btn btn-success" (click)="back()" [disabled]="curQuestionNumber == 0">
         Zurück
     </button>
-    <button class="btn btn-info" (click)="home()">
+    <button type="reset" class="btn btn-info" (click)="home()">
         Home
     </button>
     <button class="btn btn-success" (click)="forward()" [disabled]="nextDis">
@@ -107,7 +86,7 @@
     <button class="btn btn-info" (click)="showHelp()">
         Hilfe
     </button>
-    <button class="btn btn-info" (click)="checkAnswer()">
+    <button class="btn btn-info" (click)="showAnswer()">
         Richtige Antwort
     </button>
 </div>
