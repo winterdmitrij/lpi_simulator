@@ -3,7 +3,7 @@
 <!-- Fragestellung und Info -->
 <div class="container">
     <div class="row">
-        <div class="col-md-8 bg-info">
+        <div class="container col-md-8 bg-info">
             <div>
                 <h6> <b>Frage Nr. {{ curQuestion.questionId }}</b> </h6>
             </div>
@@ -13,9 +13,10 @@
         </div>
         <div class="col-md-4 bg-success">
             <h6 class="text-center"> <b>INFORMATION</b> </h6>
-            <p class="text-center">Frage {{ curQuestionNumber + 1 }} / {{ questions.length }} </p>
-            <p class="text-center">Falsch beantwortet: {{ numOfUncorrect }} / {{ questions.length }} </p>
-            <p class="text-center">Richtig beantwortet: {{ numOfCorrect }} / {{ questions.length }} </p>
+            <p class="text-center">Frage: {{ curQuestionNumber + 1 }} / {{ questions.length }} </p>
+            <h6 class="text-center"> <b>DAVON</b> </h6>
+            <p class="text-center">Falsch: {{ numOfUncorrect }} / {{ questions.length }} </p>
+            <p class="text-center">Richtig: {{ numOfCorrect }} / {{ questions.length }} </p>
             <p class="text-center">Unbeantwortet: {{ numOfUnanswered }} / {{ questions.length }} </p>
         </div>
     </div>
@@ -25,10 +26,10 @@
 <!-- Antwortbereich -->
 <div class="container bg-warning">
         <br>
-        <div *ngFor="let a of curQuestion?.answers">
+        <div *ngFor="let a of curQuestion.answers">
 
-            <!-- MultyplyChoce-Frage -->
-            <div class="checkbox" *ngIf="curQuestion?.questionTypeId==='MC'">
+            <!-- Multiple-Choice-Frage -->
+            <div class="checkbox" *ngIf="curQuestion.questionTypeId==='MC'">
 
                 <span *ngIf="!exam">
                     <input  type="checkbox" *ngIf="a.givenAnswer" checked (click)="a.givenAnswer=!a.givenAnswer">
@@ -45,8 +46,8 @@
                 </span>
             </div>
 
-            <!-- SinglChoce-Frage -->
-            <div class="radio" *ngIf="curQuestion?.questionTypeId==='SC'">
+            <!-- Single-Choice-Frage -->
+            <div class="radio" *ngIf="curQuestion.questionTypeId==='SC'">
                
                 <span *ngIf="!exam">
                     <input  type="radio" name="a.givenAnswer" *ngIf="a.givenAnswer" checked>
@@ -80,7 +81,7 @@
     <button type="reset" class="btn btn-info" (click)="home()">
         Home
     </button>
-    <button class="btn btn-success" (click)="forward()" [disabled]="nextDis">
+    <button class="btn btn-success" (click)="next()" [disabled]="nextDisable">
         Weiter
     </button>
     <button class="btn btn-info" (click)="showHelp()">

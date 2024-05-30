@@ -1,33 +1,41 @@
-import { Question } from "../models/question";
+import { Question } from "../models/definitions";
 
 export const questions: Question[] = [
 {
     "questionId": "1",
     "questionTypeId": "MC",
-    "questionText": "Which of the following are names of shell programs? (Choose all that apply.)",
+    "questionText": "Examine the description of the PROMOTIONS table:" +
+                    "Name           Null?       Type" +
+                    "-------------- ----------- --------------" +
+                    "PROMO_ID       NOT NULL    NUMBER(6)" +
+                    "PROMO_NAME     NOT NULL    VARCHAR2(30)" +
+                    "PROMO_CATEGORY NOT NULL    VARCHAR2(30)" +
+                    "PROMO_COST     NOT NULL    NUMBER(10,2)" +
+                    "You want to display the unique promotion costs in each promotion category." +
+                    "Which two queries can be used? (Choose two.)",
     "answers": [
         {
-            "answerText": "A. Bash",
+            "answerText": "A. SELECT DISTINCT promo_category || ' has ' || promo_cost AS COSTS FROM promotions ORDER BY 1;",
             "isCorrect": true
         },
         {
-            "answerText": "B. Korn Shell",
-            "isCorrect": true
-        },
-        {
-            "answerText": "C. Born Shell",
+            "answerText": "B. SELECT DISTINCT promo_cost || ' in ' || DISTINCT promo_category FROM promotions ORDER BY 1;",
             "isCorrect": false
         },
         {
-            "answerText": "D. Dash",
+            "answerText": "C. SELECT DISTINCT promo_category, promo_cost FROM promotions ORDER BY 1;",
             "isCorrect": true
         },
         {
-            "answerText": "E. Z Shell",
-            "isCorrect": true
+            "answerText": "D. SELECT promo_category DISTINCT promo_cost, FROM promotions ORDER BY 2;",
+            "isCorrect": false
+        },
+        {
+            "answerText": "E. SELECT promo_cost, promo_category FROM promotions ORDER BY 1; ",
+            "isCorrect": false
         }
     ],
-    "help": "A, B, D, E. The shell names in options A, B, D, and E are all legitimate shell program names, and thus are correct answer. There is no Born shell (you may have confused that name with the original Bourne shell), so option C is an incorrect choice."
+    "help": ""
 },
 {
     "questionId": "2",
@@ -59,83 +67,89 @@ export const questions: Question[] = [
 },
 {
     "questionId": "3",
-    "questionTypeId": "SC",
-    "questionText": "",
+    "questionTypeId": "MC",
+    "questionText": "What is true about non-equijoin statement performance? (Choose two.)",
     "answers": [
         {
-            "answerText": "A. ",
-            "isCorrect": true
-        },
-        {
-            "answerText": "B. ",
-            "isCorrect": true
-        },
-        {
-            "answerText": "C. ",
+            "answerText": "A. The BETWEEN condition always performs less well than using the >= and <= conditions. ",
             "isCorrect": false
         },
         {
-            "answerText": "D. ",
+            "answerText": "B. The BETWEEN condition always performs better than using the >= and <= conditions.",
+            "isCorrect": false
+        },
+        {
+            "answerText": "C. The Oracle join syntax performs better than the SQL:1999 compliant ANSI join syntax.",
+            "isCorrect": false
+        },
+        {
+            "answerText": "D. Table aliases can improve performance. ",
             "isCorrect": true
         },
         {
-            "answerText": "E. ",
+            "answerText": "E. The join syntax used makes no difference to performance.",
             "isCorrect": true
         }
     ],
-    "help": ""
+    "help": "DE: 50%, CD: 50%"
 },
 {
     "questionId": "4",
     "questionTypeId": "MC",
-    "questionText": "",
+    "questionText": "Which two are true? (Choose two.)",
     "answers": [
         {
-            "answerText": "A. ",
+            "answerText": "A. ADD_MONTHS adds a number of calendar months to a date.",
             "isCorrect": true
         },
         {
-            "answerText": "B. ",
-            "isCorrect": true
-        },
-        {
-            "answerText": "C. ",
+            "answerText": "B. CEIL requires an argument which is a numeric data type.",
             "isCorrect": false
         },
         {
-            "answerText": "D. ",
+            "answerText": "C. CEIL returns the largest integer less than or equal to a specified number.",
             "isCorrect": true
         },
         {
-            "answerText": "E. ",
-            "isCorrect": true
+            "answerText": "D. LAST_DAY returns the date of the last day of the current month only.",
+            "isCorrect": false
+        },
+        {
+            "answerText": "E. LAST_DAY returns the date of the last day of the month for the date argument passed to the function.",
+            "isCorrect": false
+        },
+        {
+            "answerText": "F. LAST_DAY returns the date of the last day of the previous month only. ",
+            "isCorrect": false
         }
     ],
-    "help": ""
+    "help": "AE: 92% - Reference: " +
+            "https://docs.oracle.com/database/121/SQLRF/functions025.htm " +
+            "https://docs.oracle.com/cd/B28359_01/server.111/b28286/functions004.htm "
 },
 {
     "questionId": "5",
     "questionTypeId": "MC",
-    "questionText": "",
+    "questionText": "Which three statements are true about Oracle synonyms? (Choose three.)",
     "answers": [
         {
-            "answerText": "A. ",
-            "isCorrect": true
-        },
-        {
-            "answerText": "B. ",
-            "isCorrect": true
-        },
-        {
-            "answerText": "C. ",
+            "answerText": "A. A synonym cannot be created for a PL/SQL package.",
             "isCorrect": false
         },
         {
-            "answerText": "D. ",
+            "answerText": "B. A synonym can be available to all users.",
             "isCorrect": true
         },
         {
-            "answerText": "E. ",
+            "answerText": "C. A SEQUENCE can have a synonym. ",
+            "isCorrect": true
+        },
+        {
+            "answerText": "D. Any user can drop a PUBLIC synonym.",
+            "isCorrect": false
+        },
+        {
+            "answerText": "E. A synonym created by one user can refer to an object belonging to another user.",
             "isCorrect": true
         }
     ],

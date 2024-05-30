@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { QuestionStoreService } from './shared/question-store.service';
+import { QuestionTypeService } from './services/question-types.service';
 import { LearningModeSettingsComponent } from './learning-mode-settings/learning-mode-settings.component';
 import { LearningModeComponent } from './learning-mode/learning-mode.component';
 import { PartialExamModeComponent } from './partial-exam-mode/partial-exam-mode.component';
@@ -30,7 +30,7 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule
   ],
   providers: [
-    QuestionStoreService,
+    QuestionTypeService,
     QuestionsService
   ],
   bootstrap: [AppComponent]

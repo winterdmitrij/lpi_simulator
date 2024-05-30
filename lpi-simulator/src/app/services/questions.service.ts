@@ -1,28 +1,24 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from "@angular/core";
-import { Observable } from 'rxjs';
-import { questions as data} from '../data/questions';
-import { Question } from '../models/question';
+import { questions as quests} from '../data/questions';
+import { Question } from '../models/definitions';
 
 
 @Injectable({ providedIn: 'root' })
 export class QuestionsService {
-    numberOfQuestions: number;      // Fragen Anzahl mit def-Wert = 20
-    typeIdOfQuestions: string;      // Fragentypen   mit def-Wert = 'ALL'
+    typeIdOfQuestions: string;      // Fragentypen
+    countOfQuestions: number;       // Fragenanzahl
+    pageNumber: number;             // Seitennummer
 
-    questions: Question[] = data;   // Fragenpull aus Datei /models/questsion.ts
+    questions: Question[];          // Fragenpull
 
-    constructor() {}
-
-    // Fragen Anzahl
-    getNumberOfQuestions(): number {
-        return this.numberOfQuestions;
-    } 
-
-    setNumberOfQuestions(inNum: number) {
-        this.numberOfQuestions = inNum;
+    constructor() {
+        this.questions = quests;    // Fragenpull aus der Datei /models/questsion.ts erhalten
     }
 
+    /**
+     * Getters und Setters
+     * @returns 
+     */
     // Fragentype
     getTypeIdOfQuestions(): string {
         return this.typeIdOfQuestions;
@@ -32,16 +28,37 @@ export class QuestionsService {
         this.typeIdOfQuestions = inTypeId;
     }
 
-    // Fragenpull
+    // Fragenanzahl
+    getCountOfQuestions(): number {
+        return this.countOfQuestions;
+    } 
+
+    setCountOfQuestions(inCount: number) {
+        this.countOfQuestions = inCount;
+    }
+
+    // Seitennummer
+    getPageNumber(): number {
+        return this.pageNumber;
+    }
+
+    setPageNumber(inPageNum: number) {
+        this.pageNumber = inPageNum;
+    }
+
+    /**
+     * Fragenpull
+     */
+    // Gibt Fragen-Array ohne Filter zurück
     getAllQuestions():Question[] {
         return this.questions;
     }
 
-    getQuestionsBy(inTypeId: string):Question[] {
-        let tmpQuestions: Question[] = data; //this.getAllQuestions(); //data;
-        console.log('tmp-Fragen', tmpQuestions);
+    // Gibt Fragen-Array bzgl. Fragentyp zurück
+    getQuestionsBy(inTypeId: string): Question[] {
+        let tmpQuestions: Question[] = this.questions; //.getAllQuestions(); //quests;
+        //console.log('tmp-Fragen', tmpQuestions);
         
-
         if (inTypeId == "ALL") {
             tmpQuestions;
         }
@@ -52,4 +69,41 @@ export class QuestionsService {
 
         return tmpQuestions;
     }
+
+    // Gibt die Länge des Fr-Arrays bzgl. Fragentyp zurück
+    getQuestionsCountBy(inTypeId: string): number {
+        return this.getQuestionsBy(inTypeId).length;
+    }
+
+    // Generiert den Fragenpull bzgl. Fragentyp, Fragenanzahl und Seitennummer
+    generateQuestionsBy(inTypeId: string, inCount: number, inPageNum: number): Question[] {
+        // typesierten Fragenpull erhalten
+        let typQuestions: Question[] = this.getQuestionsBy(inTypeId);
+
+        // Indexe
+        let strIdx: number = inCount * (inPageNum - 1);
+        let endInf: number = inCount * inPageNum; //this.getQuestionsCountBy(inTypeId) - inCount * inPageNum;
+        
+        return typQuestions.slice(strIdx, endInf);
+    }
+
+    //Random-Fragepul generieren
+//  generateRndQuestionPul(): Question[] {
+//    let rndIdx: number;
+//    let tmpQuestions: Question[] = this.qs.getQuestionsBy(this.typeIdOfQuestions);
+//    let rndQuestions: Question[] = [];
+//
+//    // Randome Reihenfolge aus tmp-Fragen generieren
+//    while ( tmpQuestions.length > 0 ) {
+//      rndIdx = Math.floor((Math.random() * tmpQuestions.length));
+//      rndQuestions.push(tmpQuestions[rndIdx]);
+//      tmpQuestions.splice(rndIdx, 1);                            // tmp-Fragenarray kürzen
+//    };
+//    
+//    // Fragenpull abschneiden und prüfen
+//    rndQuestions = rndQuestions.slice(0, this.numberOfQuestions);
+//
+//    return rndQuestions; 
+//  }
+
 }

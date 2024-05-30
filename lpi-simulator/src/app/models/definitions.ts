@@ -3,21 +3,14 @@ export interface Question {
     questionTypeId: string,
     questionText: string,
     answers?: Answer[],
-    answer?: FIanswer,  // ToDo: Löschen
     help?: string
 }
 
 // ToDo: was ist givenAnswer?
 export interface Answer {
-    answerText: string,
-    givenAnswer?: boolean,
-    isCorrect: boolean
-}
-
-// ToDo: Löschen
-export interface FIanswer {
-    answerText: string[],
-    givenAnswer?: string
+    answerText: string,     // Antwort: A. Bla-bla-bla
+    givenAnswer?: boolean,  // ist diese Antwort vom Benutzer als richtige markiert?
+    isCorrect: boolean      // ist diese Antwort richtige?
 }
 
 export interface UserAnswer {

@@ -6,14 +6,15 @@
         [formGroup]="form"
         (ngSubmit)="onSubmit()"
     >
-        <!-- questionType -->
+        <!-- Fragentyp -->
         <div 
             class="form-group"
         >
-            <label class="col-sm-4 control-label" for="select-questionType">Wählen Sie Fragentypen aus: </label>
+            <label class="col-sm-4 control-label" for="select-questionType">Fragentypen:</label>
             <select 
                 class="form-select form-select-lg mb-3" aria-label=".form-select-lg example"
-                formControlName="questTypeId"                
+                formControlName="questTypeId" 
+                (change)="onChange()"               
             >
                 <option
                     *ngFor="let qt of questionTypes"
@@ -28,20 +29,39 @@
         <div 
             class="form-group"
         >
-            <label class="col-sm-4 control-label" for="questionNumber">Fragenanzahl: </label>
+            <label class="col-sm-4 control-label" for="questionCount">Fragenanzahl:</label>
             <select 
                 class="form-select form-select-lg mb-3" aria-label=".form-select-lg example"
-                formControlName="questNumber"
+                formControlName="questCount"
+                (change)="onChange()"
             >
                 <option
-                    *ngFor="let qn of questionNumbers"
-                    [value]="qn"
+                    *ngFor="let qc of questionCounts"
+                    [value]="qc"
                 >
-                    {{ qn }}
+                    {{ qc }}
                 </option>
             </select>
         </div>
+
         
+        <!-- Seitennummer -->
+        <div 
+        class="form-group"
+        >
+            <label class="col-sm-4 control-label" for="pageNumber">Seitennummer:</label>
+            <select 
+                class="form-select form-select-lg mb-3" aria-label=".form-select-lg example"
+                formControlName="pageNumber"
+            >
+                <option
+                    *ngFor="let pn of pageNumbers"
+                    [value]="pn"
+                >
+                    {{ pn }}
+                </option>
+            </select>
+        </div>
         <!-- Navigation -->
         <button
             type="submit"

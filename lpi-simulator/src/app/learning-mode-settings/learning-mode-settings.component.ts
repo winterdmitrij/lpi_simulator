@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { QuestionStoreService } from '../shared/question-store.service';
+import { QuestionTypeService } from '../services/question-types.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { QuestionType } from '../models/question';
+import { QuestionType } from '../models/definitions';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { QuestionsService } from '../services/questions.service';
 
@@ -12,42 +12,61 @@ import { QuestionsService } from '../services/questions.service';
 })
 export class LearningModeSettingsComponent implements OnInit{
   // Arrays für Ausfallliste
-  questionTypes: QuestionType[];   // Array der Fragentypen
-  questionNumbers: number[];       // Array der vorangestelten Fragenmengen
+  questionTypes: QuestionType[];  // Array der Fragentypen
+  questionCounts: number[];       // Array der vorangestelten Fragenmengen
+  pageNumbers: number[];          // Array der möglichen Seten
 
   // Reactive Form
   form: FormGroup;
 
   constructor(
-    private qss: QuestionStoreService,  // ToDo: vllt. ändern
+    private qts: QuestionTypeService,
     private qs: QuestionsService,
     private route: ActivatedRoute,
     private router: Router
   ) { }
 
   ngOnInit(): void {
-    // Formular initialisieren
+    // ReactiveForm initialisieren
     this.form = new FormGroup({
       questTypeId: new FormControl('ALL', Validators.required),
-      questNumber: new FormControl('10', Validators.required)
+      questCount: new FormControl('10', Validators.required),
+      pageNumber: new FormControl('1', Validators.required)
     })
 
     // Arrays aus Fragentypen und Mengen erhalten
-    this.questionTypes = this.qss.getAllQuestionTypes();
-    this.questionNumbers = this.qss.getAllQuestionNumbers();
+    this.questionTypes = this.qts.getAllQuestionTypes();
+    this.questionCounts = this.qts.getAllQuestionNumbers();
+    this.pageNumbers = this.getPageNumbers();
   }
 
   onSubmit() {
-    console.log('Submited! ', this.form);
-    
     // ToDo: Werte setzen, vllt durch routing
     this.qs.setTypeIdOfQuestions(this.form.value.questTypeId);
-    this.qs.setNumberOfQuestions(this.form.value.questNumber);
-
-    console.log(this.form.value.questTypeId);
-    console.log(this.form.value.questNumber);
+    //console.log(this.form.value.questTypeId);
     
-    // Routing
+    this.qs.setCountOfQuestions(this.form.value.questCount);
+    //console.log(this.form.value.questCount);
+    
+    this.qs.setPageNumber(this.form.value.pageNumber);
+
+    // Routing ToDo: reactive Routing
     this.router.navigate(['', 'lerning']);
+  }
+
+  getPageNumbers(): number[]{
+    // Fragenanzahl ermitteln
+    let allQuestionCount: number = this.qs.getQuestionsCountBy(this.form.value.questTypeId);
+    //console.log('Test Fragenanzahl:', allQuestionCount);
+    
+    // Seitenanzahl ermitteln
+    let pageCount: number = Math.ceil(allQuestionCount / this.form.value.questCount);
+    //console.log('Test Seitenanzahl: ', pageCount);
+    
+    return this.qts.getAllPageNumbersBy(pageCount);
+  }
+
+  onChange() {
+    this.pageNumbers = this.getPageNumbers();
   }
 }
