@@ -1,1 +1,66 @@
-<p>partial-exam-mode works!</p>
+<h2 class="text-center"> <b>Lernmodus</b> </h2>
+
+<!-- Fragestellung und Info -->
+<div class="container">
+    <div class="row">
+        <div class="container col-md-8 bg-info">
+            <div>
+                <h6> <b>Frage Nr. {{ curQuestion.questionId }}</b> </h6>
+            </div>
+            <div>
+                <p style="font-size: 1.3rem;">{{ curQuestion.questionText }}</p>
+            </div>
+        </div>
+        <div class="col-md-4 bg-success">
+            <h6 class="text-center"> <b>INFORMATION</b> </h6>
+            <p class="text-center">Frage: {{ curQuestionNumber + 1 }} / {{ questions.length }} </p>
+            <h6 class="text-center"> <b>DAVON</b> </h6>
+            <p class="text-center">Falsch: {{ numOfUncorrect }} / {{ questions.length }} </p>
+            <p class="text-center">Richtig: {{ numOfCorrect }} / {{ questions.length }} </p>
+            <p class="text-center">Unbeantwortet: {{ numOfUnanswered }} / {{ questions.length }} </p>
+        </div>
+    </div>
+</div>
+<hr>
+
+<!-- Antwortbereich -->
+<div class="container bg-warning">
+        <br>
+        <div *ngFor="let a of curQuestion.answers">
+
+            <!-- Multiple-Choice-Frage -->
+            <div class="checkbox" *ngIf="curQuestion.questionTypeId==='MC'">
+                <span>
+                    <input type="checkbox" *ngIf="a.givenAnswer" checked (click)="a.givenAnswer=!a.givenAnswer">
+                    <input type="checkbox" *ngIf="!a.givenAnswer" unchecked (click)="a.givenAnswer=!a.givenAnswer">
+                    <span>{{a.answerText}} </span>
+                </span>
+            </div>
+
+            <!-- Single-Choice-Frage -->
+            <div class="radio" *ngIf="curQuestion.questionTypeId==='SC'">
+                <span>
+                    <input type="radio" name="a.givenAnswer" *ngIf="a.givenAnswer" checked>
+                    <input type="radio" name="a.givenAnswer" *ngIf="!a.givenAnswer" unchecked (click)="deleteAnswer(); a.givenAnswer=!a.givenAnswer">
+                    <span>{{a.answerText}} </span>
+                </span>
+            </div>
+        </div>
+</div>
+<hr>
+
+<!-- Navigation -->
+<div class="container">  
+    <button class="btn btn-success" (click)="back()" [disabled]="curQuestionNumber == 0">
+        Zurück
+    </button>
+    <button type="reset" class="btn btn-info" (click)="home()">
+        Home
+    </button>
+    <button class="btn btn-success" (click)="next()" [disabled]="nextDisable">
+        Weiter
+    </button>
+    <button class="btn btn-info" (click)="auswerten()">
+        Auswerten
+    </button>
+</div>

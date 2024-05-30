@@ -40,30 +40,34 @@ export const questions: Question[] = [
 {
     "questionId": "2",
     "questionTypeId": "MC",
-    "questionText": "",
+    "questionText": "Examine the description of the PRODUCTS table:\nName            Null?       Type\n--------------- ----------- ------------\nPRODUCT_ID      NOT NULL    NUMBER(2)\nPRODUCT_NAME                VARCHAR2(10)\nUNIT PRICE                  NUMBER(3)\nSURCHARGE                   VARCHAR2(2)\nEXPIRY_DATE                 DATE\nDELIVERY_DATE               DATE\nWhich three queries use valid expressions? (Choose three.)",
     "answers": [
         {
-            "answerText": "A. ",
-            "isCorrect": true
-        },
-        {
-            "answerText": "B. ",
-            "isCorrect": true
-        },
-        {
-            "answerText": "C. ",
+            "answerText": "A. SELECT product_id, unit_price, S \"Discount\", unit_price-+ surcharge- discount FROM products;",
             "isCorrect": false
         },
         {
-            "answerText": "D. ",
+            "answerText": "B. SELECT product_id, (unit_price * 0.15 / (4.75 + 552.25)) FROM products;",
             "isCorrect": true
         },
         {
-            "answerText": "E. ",
+            "answerText": "C. SELECT product_id, (expiry_date - delivery_date) * 2 FROM products;",
+            "isCorrect": true
+        },
+        {
+            "answerText": "D. SELECT product_id, unit_price ll 5 \"Discount\", unit_price + surcharge-discount FROM products;",
+            "isCorrect": false
+        },
+        {
+            "answerText": "E. SELECT product_id, expiry_date * 2 FROM products;",
+            "isCorrect": false
+        },
+        {
+            "answerText": "F. SELECT product_id, unit_price, unit_price + surcharge FROM products;",
             "isCorrect": true
         }
     ],
-    "help": ""
+    "help": "Community vote distribution: BCF (100%)"
 },
 {
     "questionId": "3",
@@ -71,7 +75,7 @@ export const questions: Question[] = [
     "questionText": "What is true about non-equijoin statement performance? (Choose two.)",
     "answers": [
         {
-            "answerText": "A. The BETWEEN condition always performs less well than using the >= and <= conditions. ",
+            "answerText": "A. The BETWEEN condition always performs less well than using the >= and <= conditions",
             "isCorrect": false
         },
         {
@@ -83,7 +87,7 @@ export const questions: Question[] = [
             "isCorrect": false
         },
         {
-            "answerText": "D. Table aliases can improve performance. ",
+            "answerText": "D. Table aliases can improve performance.",
             "isCorrect": true
         },
         {
@@ -91,7 +95,7 @@ export const questions: Question[] = [
             "isCorrect": true
         }
     ],
-    "help": "DE: 50%, CD: 50%"
+    "help": "Community vote distribution: DE (50%), CD (42%)"
 },
 {
     "questionId": "4",
@@ -119,13 +123,11 @@ export const questions: Question[] = [
             "isCorrect": false
         },
         {
-            "answerText": "F. LAST_DAY returns the date of the last day of the previous month only. ",
+            "answerText": "F. LAST_DAY returns the date of the last day of the previous month only.",
             "isCorrect": false
         }
     ],
-    "help": "AE: 92% - Reference: " +
-            "https://docs.oracle.com/database/121/SQLRF/functions025.htm " +
-            "https://docs.oracle.com/cd/B28359_01/server.111/b28286/functions004.htm "
+    "help": "Community vote distribution: AE (92%) \n References: \n\t https://docs.oracle.com/database/121/SQLRF/functions025.htm \n\t https://docs.oracle.com/cd/B28359_01/server.111/b28286/functions004.htm"
 },
 {
     "questionId": "5",
@@ -141,11 +143,11 @@ export const questions: Question[] = [
             "isCorrect": true
         },
         {
-            "answerText": "C. A SEQUENCE can have a synonym. ",
+            "answerText": "C. A SEQUENCE can have a synonym.",
             "isCorrect": true
         },
         {
-            "answerText": "D. Any user can drop a PUBLIC synonym.",
+            "answerText": "D. Any user can drop a PUBLIC synonym",
             "isCorrect": false
         },
         {
@@ -153,147 +155,147 @@ export const questions: Question[] = [
             "isCorrect": true
         }
     ],
-    "help": ""
+    "help": "Community vote distribution: BCE (100%)"
 },
 {
     "questionId": "6",
     "questionTypeId": "MC",
-    "questionText": "",
+    "questionText": "Which two are true? (Choose two.)",
     "answers": [
         {
-            "answerText": "A. ",
-            "isCorrect": true
+        "answerText": "A. CONCAT joins two character strings together.",
+        "isCorrect": true
         },
         {
-            "answerText": "B. ",
-            "isCorrect": true
+        "answerText": "B. CONCAT joins two or more character strings together.",
+        "isCorrect": false
         },
         {
-            "answerText": "C. ",
-            "isCorrect": false
+        "answerText": "C. FLOOR returns the largest positive integer less than or equal to a specified number.",
+        "isCorrect": false
         },
         {
-            "answerText": "D. ",
-            "isCorrect": true
+        "answerText": "D. INSTR finds the offset within a character string, starting from position 0.",
+        "isCorrect": false
         },
         {
-            "answerText": "E. ",
-            "isCorrect": true
+        "answerText": "E. INSTR finds the offset within a string of a single character only.",
+        "isCorrect": false
+        },
+        {
+        "answerText": "F. FLOOR returns the largest integer less than or equal to a specified number.",
+        "isCorrect": true
         }
     ],
-    "help": ""
+    "help": "Community vote distribution: AF (100%)"
 },
 {
     "questionId": "7",
     "questionTypeId": "MC",
-    "questionText": "",
+    "questionText": "Examine these SQL statements which execute successfully: Отсутствует кусок",
     "answers": [
         {
-            "answerText": "A. ",
-            "isCorrect": true
+        "answerText": "A. The primary key constraint will be enabled and IMMEDIATE.",
+        "isCorrect": true
         },
         {
-            "answerText": "B. ",
-            "isCorrect": true
+        "answerText": "B. The foreign key constraint willbe enabled and DEFERRED.",
+        "isCorrect": false
         },
         {
-            "answerText": "C. ",
-            "isCorrect": false
+        "answerText": "C. The primary key constraint will be enabled and DEFERRED.",
+        "isCorrect": false
         },
         {
-            "answerText": "D. ",
-            "isCorrect": true
+        "answerText": "D. The foreign key constraint will be disabled.",
+        "isCorrect": true
         },
         {
-            "answerText": "E. ",
-            "isCorrect": true
+        "answerText": "E. The foreign key constraint will be enabled and IMMEDIATE.",
+        "isCorrect": false
         }
     ],
-    "help": ""
+    "help": "Community vote distribution: AD (100%)"
 },
 {
     "questionId": "8",
     "questionTypeId": "MC",
-    "questionText": "",
+    "questionText": "Examine this SQL statement:",
     "answers": [
         {
-            "answerText": "A. ",
-            "isCorrect": true
+        "answerText": "A. All existing rows in the ORDERS table are updated.",
+        "isCorrect": true
         },
         {
-            "answerText": "B. ",
-            "isCorrect": true
+        "answerText": "B. The subquery is executed before the UPDATE statement is executed.",
+        "isCorrect": true
         },
         {
-            "answerText": "C. ",
-            "isCorrect": false
+        "answerText": "C. The subquery is not a correlated subquery.",
+        "isCorrect": false
         },
         {
-            "answerText": "D. ",
-            "isCorrect": true
+        "answerText": "D. The subquery is executed for every updated row in the ORDERS table.",
+        "isCorrect": false
         },
         {
-            "answerText": "E. ",
-            "isCorrect": true
+        "answerText": "E. The UPDATE statement executes successfully even if the subquery selects multiple rows.",
+        "isCorrect": false
         }
     ],
-    "help": ""
+    "help": "Community vote distribution: AB (69%), AE (31%)"
 },
 {
     "questionId": "9",
     "questionTypeId": "MC",
-    "questionText": "",
+    "questionText": "Which two statements are true about TRUNCATE and DELETE? (Choose two.)",
     "answers": [
         {
-            "answerText": "A. ",
-            "isCorrect": true
+        "answerText": "A. DELETE can use a WHERE clau se to determine which row(s) should be removed.",
+        "isCorrect": true
         },
         {
-            "answerText": "B. ",
-            "isCorrect": true
+        "answerText": "B. TRUNCATE can use a WHERE clause to determine which row(s) should be removed.",
+        "isCorrect": false
         },
         {
-            "answerText": "C. ",
-            "isCorrect": false
+        "answerText": "C. TRUNCATE Ieaves any indexes on the table in an UNUSABLE state.",
+        "isCorrect": false
         },
         {
-            "answerText": "D. ",
-            "isCorrect": true
+        "answerText": "D. The result of a TRUNCATE can be undone by issuing a ROLLBACK.",
+        "isCorrect": false
         },
         {
-            "answerText": "E. ",
-            "isCorrect": true
+        "answerText": "E. The result of a DELETE can be undone by issuing a ROLLBACK.",
+        "isCorrect": true
         }
     ],
-    "help": ""
+    "help": "Community vote distribution: AE (100%)"
 },
 {
     "questionId": "10",
     "questionTypeId": "SC",
-    "questionText": "",
+    "questionText": "The STORES table has a column START_DATE of data type DATE, containing the date the row was inserted. You only want to display details of rows where START DATE is within the last 25 months. \n Which WHERE clause can be used?",
     "answers": [
         {
-            "answerText": "A. ",
-            "isCorrect": true
+        "answerText": "A. WHERE TOLNUMBER(start_date - SYSDATE) <= 25",
+        "isCorrect": false
         },
         {
-            "answerText": "B. ",
-            "isCorrect": true
+        "answerText": "B. WHERE MONTHS_BETWEEN(start_date, SYSDATE) <= 25",
+        "isCorrect": false
         },
         {
-            "answerText": "C. ",
-            "isCorrect": false
+        "answerText": "C. WHERE MONTHS_BETWEEN(SYSDATE, start_date) <= 25",
+        "isCorrect": true
         },
         {
-            "answerText": "D. ",
-            "isCorrect": true
-        },
-        {
-            "answerText": "E. ",
-            "isCorrect": true
+        "answerText": "D. WHERE ADD_MONTHS(start_date, 25) <= SYSDATE",
+        "isCorrect": false
         }
     ],
-    "help": ""
+    "help": "Community vote distribution: C(100%)"
 },
 {
     "questionId": "11",
