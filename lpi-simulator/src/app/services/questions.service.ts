@@ -87,23 +87,22 @@ export class QuestionsService {
         return typQuestions.slice(strIdx, endInf);
     }
 
-    //Random-Fragepul generieren
-//  generateRndQuestionPul(): Question[] {
-//    let rndIdx: number;
-//    let tmpQuestions: Question[] = this.qs.getQuestionsBy(this.typeIdOfQuestions);
-//    let rndQuestions: Question[] = [];
-//
-//    // Randome Reihenfolge aus tmp-Fragen generieren
-//    while ( tmpQuestions.length > 0 ) {
-//      rndIdx = Math.floor((Math.random() * tmpQuestions.length));
-//      rndQuestions.push(tmpQuestions[rndIdx]);
-//      tmpQuestions.splice(rndIdx, 1);                            // tmp-Fragenarray kürzen
-//    };
-//    
-//    // Fragenpull abschneiden und prüfen
-//    rndQuestions = rndQuestions.slice(0, this.numberOfQuestions);
-//
-//    return rndQuestions; 
-//  }
+    // Random-Fragepul generieren
+    generateRndQuestionPul(): Question[] {
+        let rndIdx: number;
+        let tmpQuestions: Question[] = this.getAllQuestions();
+        let rndQuestions: Question[] = [];
 
+        // Randome Reihenfolge aus tmp-Fragen generieren
+        while ( tmpQuestions.length > 0 ) {
+            // rndIdx generieren
+            rndIdx = Math.floor((Math.random() * tmpQuestions.length));
+            // Item aus tmpQuestions zu rndQuestions kopieren
+            rndQuestions.push(tmpQuestions[rndIdx]);
+            // Den Item des tmpQuestions löschen
+            tmpQuestions.splice(rndIdx, 1);
+        };
+
+        return rndQuestions.slice(0, 60);
+    }
 }

@@ -1,5 +1,46 @@
 <div class="container-fluid">
   <h1 class="text-center">{{ title }}</h1>
 </div>
-<hr>
+<nav class="navbar navbar-dark bg-dark">
+	<div class="container">
+		<ul class="nav nav-tabs">
+			<li class="nav-item">
+				<a
+					class="nav-link"	
+					[routerLink]="'/home'"
+					routerLinkActive="active"
+				>
+					Home
+				</a>
+			</li>
+			<li class="nav-item">
+				<a
+					class="nav-link"	
+					[routerLink]="'/training'"
+					routerLinkActive="active"
+				>
+					Training
+				</a>
+			</li>
+			<li class="nav-item">
+				<a
+					class="nav-link"	
+					[routerLink]="'/part-exam'"
+					routerLinkActive="active"
+				>
+					Teil-Prüfung
+				</a>
+			</li>
+			<li class="nav-item">
+				<a
+					class="nav-link"	
+					[routerLink]="'/exam'"
+					routerLinkActive="active"
+				>
+					Prüfung
+				</a>
+			</li>
+		</ul>
+	</div>
+</nav>
 <router-outlet></router-outlet>

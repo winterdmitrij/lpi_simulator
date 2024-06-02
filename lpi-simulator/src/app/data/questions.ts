@@ -4,7 +4,7 @@ export const questions: Question[] = [
 {
     "questionId": "1",
     "questionTypeId": "MC",
-    "questionText": "Examine the description of the PROMOTIONS table:" +
+    "questionText": "Examine the description of the PROMOTIONS table:" + 
                     "Name           Null?       Type" +
                     "-------------- ----------- --------------" +
                     "PROMO_ID       NOT NULL    NUMBER(6)" +
@@ -40,7 +40,7 @@ export const questions: Question[] = [
 {
     "questionId": "2",
     "questionTypeId": "MC",
-    "questionText": "Examine the description of the PRODUCTS table:\nName            Null?       Type\n--------------- ----------- ------------\nPRODUCT_ID      NOT NULL    NUMBER(2)\nPRODUCT_NAME                VARCHAR2(10)\nUNIT PRICE                  NUMBER(3)\nSURCHARGE                   VARCHAR2(2)\nEXPIRY_DATE                 DATE\nDELIVERY_DATE               DATE\nWhich three queries use valid expressions? (Choose three.)",
+    "questionText": "Examine the description of the PRODUCTS table: \n Name            Null?       Type\n --------------- ----------- ------------\nPRODUCT_ID      NOT NULL    NUMBER(2)\nPRODUCT_NAME                VARCHAR2(10)\nUNIT PRICE                  NUMBER(3)\nSURCHARGE                   VARCHAR2(2)\nEXPIRY_DATE                 DATE\nDELIVERY_DATE               DATE\nWhich three queries use valid expressions? (Choose three.)",
     "answers": [
         {
             "answerText": "A. SELECT product_id, unit_price, S \"Discount\", unit_price-+ surcharge- discount FROM products;",
@@ -163,140 +163,140 @@ export const questions: Question[] = [
     "questionText": "Which two are true? (Choose two.)",
     "answers": [
         {
-        "answerText": "A. CONCAT joins two character strings together.",
-        "isCorrect": true
+            "answerText": "A. CONCAT joins two character strings together.",
+            "isCorrect": true
         },
         {
-        "answerText": "B. CONCAT joins two or more character strings together.",
-        "isCorrect": false
+            "answerText": "B. CONCAT joins two or more character strings together.",
+            "isCorrect": false
         },
         {
-        "answerText": "C. FLOOR returns the largest positive integer less than or equal to a specified number.",
-        "isCorrect": false
+            "answerText": "C. FLOOR returns the largest positive integer less than or equal to a specified number.",
+            "isCorrect": false
         },
         {
-        "answerText": "D. INSTR finds the offset within a character string, starting from position 0.",
-        "isCorrect": false
+            "answerText": "D. INSTR finds the offset within a character string, starting from position 0.",
+            "isCorrect": false
         },
         {
-        "answerText": "E. INSTR finds the offset within a string of a single character only.",
-        "isCorrect": false
+            "answerText": "E. INSTR finds the offset within a string of a single character only.",
+            "isCorrect": false
         },
         {
-        "answerText": "F. FLOOR returns the largest integer less than or equal to a specified number.",
-        "isCorrect": true
+            "answerText": "F. FLOOR returns the largest integer less than or equal to a specified number.",
+            "isCorrect": true
         }
     ],
     "help": "Community vote distribution: AF (100%)"
-},
-{
+  },
+  {
     "questionId": "7",
     "questionTypeId": "MC",
-    "questionText": "Examine these SQL statements which execute successfully: Отсутствует кусок",
+    "questionText": "Examine these SQL statements which execute successfully:\nCREATE TABLE emp (emp_no NUMBER(2) CONSTRAINT emp_emp_no_pk PRIMARY KEY,\n                  ename  VARCHAR2(15),\n                  salary NUMBER(8,2),\n                  mgr_no NUMBER (2));\n\nALTER TABLE emp \nADD CONSTRAINT emp_mgr_fk FOREIGN KEY (mgr_no)\n    REFERENCES emp (emp_no) ON DELETE SET NULL;\n\nALTER TABLE emp DISABLE CONSTRAINT emp_emp_no_pk CASCADE;\n\nALTER TABLE emp ENABLE CONSTRAINT emp_emp_no_pk;\n\nWhich two statements are true after execution? (Choose two.)",
     "answers": [
         {
-        "answerText": "A. The primary key constraint will be enabled and IMMEDIATE.",
-        "isCorrect": true
+            "answerText": "A. The primary key constraint will be enabled and IMMEDIATE.",
+            "isCorrect": true
         },
         {
-        "answerText": "B. The foreign key constraint willbe enabled and DEFERRED.",
-        "isCorrect": false
+            "answerText": "B. The foreign key constraint willbe enabled and DEFERRED.",
+            "isCorrect": false
         },
         {
-        "answerText": "C. The primary key constraint will be enabled and DEFERRED.",
-        "isCorrect": false
+            "answerText": "C. The primary key constraint will be enabled and DEFERRED.",
+            "isCorrect": false
         },
         {
-        "answerText": "D. The foreign key constraint will be disabled.",
-        "isCorrect": true
+            "answerText": "D. The foreign key constraint will be disabled.",
+            "isCorrect": true
         },
         {
-        "answerText": "E. The foreign key constraint will be enabled and IMMEDIATE.",
-        "isCorrect": false
+            "answerText": "E. The foreign key constraint will be enabled and IMMEDIATE.",
+            "isCorrect": false
         }
     ],
     "help": "Community vote distribution: AD (100%)"
-},
-{
+  },
+  {
     "questionId": "8",
     "questionTypeId": "MC",
-    "questionText": "Examine this SQL statement:",
+    "questionText": "Examine this SQL statement:\nUPDATE orders o\n   SET customer_name = \n(SELECT cust_last_name\n FROM customers\n WHERE customer_id = o.customer_id)\nWhich two are true? (Choose two.)",
     "answers": [
         {
-        "answerText": "A. All existing rows in the ORDERS table are updated.",
-        "isCorrect": true
+            "answerText": "A. All existing rows in the ORDERS table are updated.",
+            "isCorrect": true
         },
         {
-        "answerText": "B. The subquery is executed before the UPDATE statement is executed.",
-        "isCorrect": true
+            "answerText": "B. The subquery is executed before the UPDATE statement is executed.",
+            "isCorrect": true
         },
         {
-        "answerText": "C. The subquery is not a correlated subquery.",
-        "isCorrect": false
+            "answerText": "C. The subquery is not a correlated subquery.",
+            "isCorrect": false
         },
         {
-        "answerText": "D. The subquery is executed for every updated row in the ORDERS table.",
-        "isCorrect": false
+            "answerText": "D. The subquery is executed for every updated row in the ORDERS table.",
+            "isCorrect": false
         },
         {
-        "answerText": "E. The UPDATE statement executes successfully even if the subquery selects multiple rows.",
-        "isCorrect": false
+            "answerText": "E. The UPDATE statement executes successfully even if the subquery selects multiple rows.",
+            "isCorrect": false
         }
     ],
     "help": "Community vote distribution: AB (69%), AE (31%)"
-},
-{
+  },
+  {
     "questionId": "9",
     "questionTypeId": "MC",
     "questionText": "Which two statements are true about TRUNCATE and DELETE? (Choose two.)",
     "answers": [
         {
-        "answerText": "A. DELETE can use a WHERE clau se to determine which row(s) should be removed.",
-        "isCorrect": true
+            "answerText": "A. DELETE can use a WHERE clause to determine which row(s) should be removed.",
+            "isCorrect": true
         },
         {
-        "answerText": "B. TRUNCATE can use a WHERE clause to determine which row(s) should be removed.",
-        "isCorrect": false
+            "answerText": "B. TRUNCATE can use a WHERE clause to determine which row(s) should be removed.",
+            "isCorrect": false
         },
         {
-        "answerText": "C. TRUNCATE Ieaves any indexes on the table in an UNUSABLE state.",
-        "isCorrect": false
+            "answerText": "C. TRUNCATE leaves any indexes on the table in an UNUSABLE state.",
+            "isCorrect": false
         },
         {
-        "answerText": "D. The result of a TRUNCATE can be undone by issuing a ROLLBACK.",
-        "isCorrect": false
+            "answerText": "D. The result of a TRUNCATE can be undone by issuing a ROLLBACK.",
+            "isCorrect": false
         },
         {
-        "answerText": "E. The result of a DELETE can be undone by issuing a ROLLBACK.",
-        "isCorrect": true
+            "answerText": "E. The result of a DELETE can be undone by issuing a ROLLBACK.",
+            "isCorrect": true
         }
     ],
     "help": "Community vote distribution: AE (100%)"
-},
-{
+  },
+  {
     "questionId": "10",
     "questionTypeId": "SC",
-    "questionText": "The STORES table has a column START_DATE of data type DATE, containing the date the row was inserted. You only want to display details of rows where START DATE is within the last 25 months. \n Which WHERE clause can be used?",
+    "questionText": "The STORES table has a column START_DATE of data type DATE, containing the date the row was inserted.\nYou only want to display details of rows where START DATE is within the last 25 months.\nWhich WHERE clause can be used?",
     "answers": [
         {
-        "answerText": "A. WHERE TOLNUMBER(start_date - SYSDATE) <= 25",
-        "isCorrect": false
+            "answerText": "A. WHERE TOLNUMBER(start_date - SYSDATE) <= 25",
+            "isCorrect": false
         },
         {
-        "answerText": "B. WHERE MONTHS_BETWEEN(start_date, SYSDATE) <= 25",
-        "isCorrect": false
+            "answerText": "B. WHERE MONTHS_BETWEEN(start_date, SYSDATE) <= 25",
+            "isCorrect": false
         },
         {
-        "answerText": "C. WHERE MONTHS_BETWEEN(SYSDATE, start_date) <= 25",
-        "isCorrect": true
+            "answerText": "C. WHERE MONTHS_BETWEEN(SYSDATE, start_date) <= 25",
+            "isCorrect": true
         },
         {
-        "answerText": "D. WHERE ADD_MONTHS(start_date, 25) <= SYSDATE",
-        "isCorrect": false
+            "answerText": "D. WHERE ADD_MONTHS(start_date, 25) <= SYSDATE",
+            "isCorrect": false
         }
     ],
     "help": "Community vote distribution: C(100%)"
-},
+  },
 {
     "questionId": "11",
     "questionTypeId": "MC",

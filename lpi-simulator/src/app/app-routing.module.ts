@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { LearningModeSettingsComponent } from './learning-mode-settings/learning-mode-settings.component';
-import { LearningModeComponent } from './learning-mode/learning-mode.component';
-import { PartialExamModeComponent } from './partial-exam-mode/partial-exam-mode.component';
-import { FullExamModeComponent } from './full-exam-mode/full-exam-mode.component';
+import { SettingsComponent } from './settings/settings.component';
+import { TrainingComponent } from './training/training.component';
+import { PartialExamComponent } from './partial-exam/partial-exam.component';
+import { ExamComponent } from './exam/exam.component';
 
 const routes: Routes = [
   {
@@ -17,20 +17,20 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
-    path: 'settings',
-    component: LearningModeSettingsComponent
+    path: 'training',
+    component: SettingsComponent,
   },
   {
-    path: 'lerning',
-    component: LearningModeComponent
+    path: 'training/:typeId',
+    component: TrainingComponent
   },
   {
-    path: 'partial',
-    component: PartialExamModeComponent
+    path: 'part-exam',
+    component: PartialExamComponent
   },
   {
-    path: 'full-exam',
-    component: FullExamModeComponent
+    path: 'exam',
+    component: ExamComponent
   }
 ];
 

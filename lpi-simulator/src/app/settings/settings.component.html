@@ -63,13 +63,15 @@
             </select>
         </div>
         <!-- Navigation -->
-        <button
-            type="submit"
-            class="btn btn-success btn-lg btn-block"
-            [disabled]="form.invalid"
-        >
-            Zum Lernmodus
-        </button>
+        <div class="d-grid gap-2">
+            <button
+                type="submit"
+                class="btn btn-primary"
+                [disabled]="form.invalid"
+            >
+                Zum Training
+            </button>
+        </div>
     </form>
 
 </div>

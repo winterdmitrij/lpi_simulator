@@ -5,22 +5,22 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { QuestionTypeService } from './services/question-types.service';
-import { LearningModeSettingsComponent } from './learning-mode-settings/learning-mode-settings.component';
-import { LearningModeComponent } from './learning-mode/learning-mode.component';
-import { PartialExamModeComponent } from './partial-exam-mode/partial-exam-mode.component';
-import { FullExamModeComponent } from './full-exam-mode/full-exam-mode.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { QuestionsService } from './services/questions.service';
 import { HttpClientModule } from '@angular/common/http';
+import { SettingsComponent } from './settings/settings.component';
+import { TrainingComponent } from './training/training.component';
+import { PartialExamComponent } from './partial-exam/partial-exam.component';
+import { ExamComponent } from './exam/exam.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    LearningModeSettingsComponent,
-    LearningModeComponent,
-    PartialExamModeComponent,
-    FullExamModeComponent
+    SettingsComponent,
+    TrainingComponent,
+    PartialExamComponent,
+    ExamComponent
   ],
   imports: [
     BrowserModule,

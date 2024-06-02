@@ -3,14 +3,17 @@
 <!-- Fragestellung und Info -->
 <div class="container">
     <div class="row">
+        <!-- Fragestellung -->
         <div class="container col-md-8 bg-info">
             <div>
                 <h6> <b>Frage Nr. {{ curQuestion.questionId }}</b> </h6>
             </div>
             <div>
-                <p style="font-size: 1.3rem;">{{ curQuestion.questionText }}</p>
+                <div [innerHTML]="curQuestion.questionText"></div>
             </div>
         </div>
+
+        <!-- Information -->
         <div class="col-md-4 bg-success">
             <h6 class="text-center"> <b>INFORMATION</b> </h6>
             <p class="text-center">Frage: {{ curQuestionNumber + 1 }} / {{ questions.length }} </p>
@@ -24,7 +27,7 @@
 <hr>
 
 <!-- Antwortbereich -->
-<div class="container bg-warning">
+<div class="container bg-info">
         <br>
         <div *ngFor="let a of curQuestion.answers">
 
@@ -74,20 +77,64 @@
 
 
 <!-- Navigation -->
-<div class="container">  
-    <button class="btn btn-success" (click)="back()" [disabled]="curQuestionNumber == 0">
-        Zurück
-    </button>
-    <button type="reset" class="btn btn-info" (click)="home()">
-        Home
-    </button>
-    <button class="btn btn-success" (click)="next()" [disabled]="nextDisable">
-        Weiter
-    </button>
-    <button class="btn btn-info" (click)="showHelp()">
-        Hilfe
-    </button>
-    <button class="btn btn-info" (click)="showAnswer()">
-        Richtige Antwort
-    </button>
+<div class="container">
+    <div class="row">
+        <div class="container col-md-3">
+            <button 
+                type="button"
+                class="btn btn-primary"
+                (click)="back()"
+                [disabled]="curQuestionNumber == 0"
+            >
+                Zur vorherigen Frage
+            </button>
+        </div>
+        <div class="container col-md-3">
+            <button 
+                type="button"    
+                class="btn btn-primary"
+                (click)="next()"
+                [disabled]="nextDisable"
+            >
+                Zur nächsten Frage
+            </button>
+        </div>
+        <div class="container col-md-3">
+            <button 
+                *ngIf="!show"
+                type="button"
+                class="btn btn-primary"
+                (click)="showHelp()"
+                [disabled]="curQuestion.help===''"
+            >
+                Hilfe anzeigen
+            </button>
+            <button 
+                *ngIf="show"
+                type="button"
+                class="btn btn-primary"
+                (click)="showHelp()"
+            >
+                Hilfe verstecken
+            </button>
+        </div>
+        <div class="container col-md-3">
+            <button 
+                *ngIf="curQuestion.questionTypeId==='MC'"
+                type="button"
+                class="btn btn-primary"
+                (click)="showAnswer()"
+            >
+                Richtige Antworten
+            </button>
+            <button 
+                *ngIf="curQuestion.questionTypeId==='SC'"
+                type="button"
+                class="btn btn-primary"
+                (click)="showAnswer()"
+            >
+                Richtige Antwort
+            </button>
+        </div>
+    </div>
 </div>

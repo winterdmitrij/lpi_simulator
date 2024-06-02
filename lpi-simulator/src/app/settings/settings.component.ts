@@ -6,11 +6,11 @@ import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { QuestionsService } from '../services/questions.service';
 
 @Component({
-  selector: 'app-learning-mode-settings',
-  templateUrl: './learning-mode-settings.component.html',
-  styleUrls: ['./learning-mode-settings.component.css']
+  selector: 'app-settings',
+  templateUrl: './settings.component.html',
+  styleUrls: ['./settings.component.css']
 })
-export class LearningModeSettingsComponent implements OnInit{
+export class SettingsComponent implements OnInit{
   // Arrays für Ausfallliste
   questionTypes: QuestionType[];  // Array der Fragentypen
   questionCounts: number[];       // Array der vorangestelten Fragenmengen
@@ -22,8 +22,8 @@ export class LearningModeSettingsComponent implements OnInit{
   constructor(
     private qts: QuestionTypeService,
     private qs: QuestionsService,
-    private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
@@ -41,17 +41,16 @@ export class LearningModeSettingsComponent implements OnInit{
   }
 
   onSubmit() {
-    // ToDo: Werte setzen, vllt durch routing
-    this.qs.setTypeIdOfQuestions(this.form.value.questTypeId);
-    //console.log(this.form.value.questTypeId);
-    
-    this.qs.setCountOfQuestions(this.form.value.questCount);
-    //console.log(this.form.value.questCount);
-    
-    this.qs.setPageNumber(this.form.value.pageNumber);
-
-    // Routing ToDo: reactive Routing
-    this.router.navigate(['', 'lerning']);
+    // Zum Training weiterleiten, mit TypeId, Count und Page als QueryParams
+    this.router.navigate(
+      ['/training', this.form.value.questTypeId],
+      {
+        queryParams: {
+          count: this.form.value.questCount,
+          page: this.form.value.pageNumber
+        } 
+      }
+    );
   }
 
   getPageNumbers(): number[]{

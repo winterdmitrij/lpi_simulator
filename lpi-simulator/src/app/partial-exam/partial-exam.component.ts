@@ -1,58 +1,40 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Question, UserAnswer } from '../models/definitions';
-import { Router } from '@angular/router';
 import { QuestionsService } from '../services/questions.service';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-learning-mode',
-  templateUrl: './learning-mode.component.html',
-  styleUrls: ['./learning-mode.component.css']
+  selector: 'app-partial-exam',
+  templateUrl: './partial-exam.component.html',
+  styleUrls: ['./partial-exam.component.css']
 })
-export class LearningModeComponent implements OnInit{
-  // Variablen von EinstellungsSeite            // ToDo: vllt. mit @Input
-  typeIdOfQuestions: string;      // Fragentyp
-  numberOfQuestions: number;      // Fragenmenge
-  pageNumber: number;             // Seitennummer
-  
+export class PartialExamComponent implements OnInit{
+  // Constanten
+  questionsCont: number = 60;       // Fragenmenge
+
   // Fragenpull
-  questions: Question[] = [];     // Fragen-Array
-  curQuestion: Question;          // Aktuele Frage des Fragenpull
-  curQuestionNumber: number = 0;  // Nummer der Fragen
+  questions: Question[] = [];       // Fragen-Array
+  curQuestion: Question;            // Aktuele Frage des Fragenpull
+  curQuestionNumber: number = 0;    // Nummer der Fragen
 
   // Benutzer-Antworten
-  userAnswers: UserAnswer[] = []; // Antworten-Array
-  userAnswer: UserAnswer;         // 
-  isAnswered?: boolean;           //
-  isCorrect?: boolean;            //
+  userAnswers: UserAnswer[] = [];   // Antworten-Array
+  userAnswer: UserAnswer;           // 
 
   // Zählers
-  numOfCorrect: number;           // Anzahl richtirer Antworten
-  numOfUncorrect: number;         // Anzahl falscher Antworten
-  numOfUnanswered: number;        // Anzahl Fragen ohne Antwort
-
-  // Flags
-  show: boolean;                  // Hilfe anzeigen
-  exam: boolean;                  // Antwort prüfen
-  nextDisable: boolean;           // Taste Next-Disable
+  cntCorrect: number;               // Anzahl richtirer Antworten
+  cntUncorrect: number;             // Anzahl falscher Antworten
+  cntUnanswered: number;            // Anzahl Fragen ohne Antwort
 
   constructor(
     private qs: QuestionsService,
     private router: Router
   ) { }
 
-  ngOnInit(): void {
-    // Flags
-    this.show = false;
-    this.exam = false;
-    this.nextDisable = false;
 
-    // Variablen von EinstellungsSeite erhalten               // ToDo: Richtig lösen
-    this.typeIdOfQuestions = this.qs.getTypeIdOfQuestions();
-    this.numberOfQuestions = this.qs.getCountOfQuestions();
-    this.pageNumber = this.qs.getPageNumber();
-  
-    // Fragenpull generieren
-    this.questions = this.qs.generateQuestionsBy(this.typeIdOfQuestions, this.numberOfQuestions, this.pageNumber);
+  ngOnInit(): void {
+    // ToDo: Random-Fragenpull generieren
+    this.questions = this.qs.generateRndQuestionPul();
     
     // Fragenpull durchgehen und
     this.questions.map(quest => {
@@ -68,14 +50,15 @@ export class LearningModeComponent implements OnInit{
     });
 
     // Zählers
-    this.numOfCorrect = 0;
-    this.numOfUncorrect = 0;
-    this.numOfUnanswered = this.questions.length;
+    this.cntCorrect = 0;
+    this.cntUncorrect = 0;
+    this.cntUnanswered = this.questions.length;
 
     // Aktuelle Frage
     this.curQuestionNumber = 0;
     this.curQuestion = this.questions[this.curQuestionNumber];
   }
+
 
 //--------------------- Benutzersantwort-Analyse ----------------------------
   /**
@@ -83,26 +66,26 @@ export class LearningModeComponent implements OnInit{
    */
   chkAnswer() {
     // Setzen alle Variablen auf False
-    this.isCorrect = false;
-    this.isAnswered = false;
+    let isCorrect: boolean = false;
+    let isAnswered: boolean = false;
  
     // Überprüfen, ob Antwort gegeben ist
     this.curQuestion.answers?.map(a => {
       // Nehmen wir an, dass die Antwort richtig ist
-      this.isCorrect = true;
+      isCorrect = true;
       
       // Wenn mindestens einer der Antworten angeklickt => ist Beantwortet
-      if(a.givenAnswer) this.isAnswered = true;
+      if(a.givenAnswer) isAnswered = true;
 
       // Wenn mindestens einer der Antworten falsch ist => ist ganze Frage falsch Beantwortet
-      if (a.givenAnswer != a.isCorrect) this.isCorrect = false;
+      if (a.givenAnswer != a.isCorrect) isCorrect = false;
     });
 
     // erzeugen Objekt: userAnswer
     this.userAnswer = {
       questionId: this.curQuestion.questionId,
-      isAnswered: this.isAnswered,
-      isCorrect: this.isCorrect
+      isAnswered: isAnswered,
+      isCorrect: isCorrect
     };
 
     // Wenn Antwort schon gegeben wurde, überschreiben wir diese im userAnswers
@@ -113,9 +96,6 @@ export class LearningModeComponent implements OnInit{
         }
       };
     };
-
-    // Test der Benutzer-Antworten
-    console.log(this.userAnswers);
   }
 
   /**
@@ -124,7 +104,7 @@ export class LearningModeComponent implements OnInit{
   updInfo() {
     let cntCorrect: number = 0;
     let cntUncorrect: number = 0;
-    let cntUnanswered: number = this.numberOfQuestions;
+    let cntUnanswered: number = this.questionsCont;
 
     // Benutzeranworten-Array durchgehen
     this.userAnswers.map(a => {
@@ -137,10 +117,11 @@ export class LearningModeComponent implements OnInit{
     });
 
     // Zählers aktualisieren
-    this.numOfCorrect = cntCorrect;
-    this.numOfUncorrect = cntUncorrect;
-    this.numOfUnanswered = cntUnanswered;
+    this.cntCorrect = cntCorrect;
+    this.cntUncorrect = cntUncorrect;
+    this.cntUnanswered = cntUnanswered;
   }
+
 
 
 //----------------------- Bottons ---------------------------------
@@ -158,18 +139,9 @@ export class LearningModeComponent implements OnInit{
     {
       this.curQuestionNumber--;
       this.curQuestion = this.questions[this.curQuestionNumber];
-      this.exam = false;
-      this.show = false;
-      this.nextDisable = false;
     }
   }
 
-  /**
-   * Home
-   */
-  home() {
-    this.router.navigate(['', 'home']);
-  }
 
   /**
    * Weiter
@@ -186,27 +158,44 @@ export class LearningModeComponent implements OnInit{
     {
       this.curQuestionNumber++;
       this.curQuestion = this.questions[this.curQuestionNumber];
-      this.exam = false;
-      this.show = false;
     }
-    else
-      this.nextDisable = true;  // disabled für taste "next"
   };
 
-  /**
-   * Hilfe anzeigen
-   */
-  showHelp() {
-    this.show = !this.show;
-  };
-  
-  /**
-   * Richtige Antwort(en) anzeigen
-   */
-  showAnswer() {
-    this.exam = !this.exam;
-  };
-  
+
+  auswerten() {
+    // Antwort überprüfen und sie im userAnswers-Array hinzufügen
+    this.chkAnswer();
+
+    // Zehlen richtige und falsche Antworten
+    this.updInfo();
+
+    // Meldung: OK - zur Auswertung, CANCEL - hier bleiben
+    let jain = false;
+    if(this.cntUnanswered > 0) {
+      jain = confirm ("\nSind Sie sicher?\nSie haben noch unbeantworteten Fragen!");
+    };
+
+    console.log('jain ist: ', jain);
+
+    if (jain) {
+
+      // in UserAntworten fügen FragenText hinzu (um schönere FragenAusgabe in Auswertung zu haben)
+      this.userAnswers.map(answ => {
+        answ.questionId = (answ.questionId + '. ' + this.questions.find(quest => (quest.questionId === answ.questionId))?.questionText);
+      });
+
+      // Userantworten schicken zu FS
+//      this.fs.getUserAntworten(this.userAntworten);
+
+      console.log('UserAntworten, die zur Auswertung geschickt werden, sind: ', this.userAnswers);
+
+//      this.router.navigate(['', 'auswertung']);
+    };    
+  }
+
+
+
+
   /**
    * Hilfsfunktion für Singlechoice-Fragen
    */
