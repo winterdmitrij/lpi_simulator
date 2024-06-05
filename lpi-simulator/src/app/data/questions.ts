@@ -4,14 +4,14 @@ export const questions: Question[] = [
 {
     "questionId": "1",
     "questionTypeId": "MC",
-    "questionText": "Examine the description of the PROMOTIONS table:" + 
-                    "Name           Null?       Type" +
-                    "-------------- ----------- --------------" +
-                    "PROMO_ID       NOT NULL    NUMBER(6)" +
-                    "PROMO_NAME     NOT NULL    VARCHAR2(30)" +
-                    "PROMO_CATEGORY NOT NULL    VARCHAR2(30)" +
-                    "PROMO_COST     NOT NULL    NUMBER(10,2)" +
-                    "You want to display the unique promotion costs in each promotion category." +
+    "questionText": "Examine the description of the PROMOTIONS table:\n\n" + 
+                    "Name            Null      Type\n" +
+                    "--------------  --------  ------------\n" +
+                    "PROMO_ID        NOT NULL  NUMBER(6)\n" +
+                    "PROMO_NAME      NOT NULL  VARCHAR2(30)\n" +
+                    "PROMO_CATEGORY  NOT NULL  VARCHAR2(30)\n" +
+                    "PROMO_COST      NOT NULL  NUMBER(10,2)\n\n" +
+                    "You want to display the unique promotion costs in each promotion category.\n" +
                     "Which two queries can be used? (Choose two.)",
     "answers": [
         {
@@ -40,7 +40,16 @@ export const questions: Question[] = [
 {
     "questionId": "2",
     "questionTypeId": "MC",
-    "questionText": "Examine the description of the PRODUCTS table: \n Name            Null?       Type\n --------------- ----------- ------------\nPRODUCT_ID      NOT NULL    NUMBER(2)\nPRODUCT_NAME                VARCHAR2(10)\nUNIT PRICE                  NUMBER(3)\nSURCHARGE                   VARCHAR2(2)\nEXPIRY_DATE                 DATE\nDELIVERY_DATE               DATE\nWhich three queries use valid expressions? (Choose three.)",
+    "questionText": "Examine the description of the PRODUCTS table:\n\n" +
+                    "Name           Null?     Type\n" +
+                    "-------------  --------  ------------\n" +
+                    "PRODUCT_ID     NOT NULL  NUMBER(2)\n" +
+                    "PRODUCT_NAME             VARCHAR2(10)\n" +
+                    "UNIT PRICE               NUMBER(3)\n" +
+                    "SURCHARGE                VARCHAR2(2)\n" +
+                    "EXPIRY_DATE              DATE\n" +
+                    "DELIVERY_DATE            DATE\n\n" +
+                    "Which three queries use valid expressions? (Choose three.)",
     "answers": [
         {
             "answerText": "A. SELECT product_id, unit_price, S \"Discount\", unit_price-+ surcharge- discount FROM products;",
@@ -192,7 +201,17 @@ export const questions: Question[] = [
   {
     "questionId": "7",
     "questionTypeId": "MC",
-    "questionText": "Examine these SQL statements which execute successfully:\nCREATE TABLE emp (emp_no NUMBER(2) CONSTRAINT emp_emp_no_pk PRIMARY KEY,\n                  ename  VARCHAR2(15),\n                  salary NUMBER(8,2),\n                  mgr_no NUMBER (2));\n\nALTER TABLE emp \nADD CONSTRAINT emp_mgr_fk FOREIGN KEY (mgr_no)\n    REFERENCES emp (emp_no) ON DELETE SET NULL;\n\nALTER TABLE emp DISABLE CONSTRAINT emp_emp_no_pk CASCADE;\n\nALTER TABLE emp ENABLE CONSTRAINT emp_emp_no_pk;\n\nWhich two statements are true after execution? (Choose two.)",
+    "questionText": "Examine these SQL statements which execute successfully:\n\n" +
+                    "CREATE TABLE emp (emp_no NUMBER(2) CONSTRAINT emp_emp_no_pk PRIMARY KEY,\n"+
+                    "                  ename  VARCHAR2(15),\n"+
+                    "                  salary NUMBER(8,2),\n"+
+                    "                  mgr_no NUMBER (2));\n\n"+
+                    "ALTER TABLE emp \n"+
+                    "  ADD CONSTRAINT emp_mgr_fk FOREIGN KEY (mgr_no)\n"+
+                    "      REFERENCES emp (emp_no) ON DELETE SET NULL;\n\n"+
+                    "ALTER TABLE emp DISABLE CONSTRAINT emp_emp_no_pk CASCADE;\n\n"+
+                    "ALTER TABLE emp ENABLE CONSTRAINT emp_emp_no_pk;\n\n"+
+                    "Which two statements are true after execution? (Choose two.)",
     "answers": [
         {
             "answerText": "A. The primary key constraint will be enabled and IMMEDIATE.",
@@ -220,7 +239,12 @@ export const questions: Question[] = [
   {
     "questionId": "8",
     "questionTypeId": "MC",
-    "questionText": "Examine this SQL statement:\nUPDATE orders o\n   SET customer_name = \n(SELECT cust_last_name\n FROM customers\n WHERE customer_id = o.customer_id)\nWhich two are true? (Choose two.)",
+    "questionText": "Examine this SQL statement:\n\n"+
+                    "UPDATE orders o\n"+
+                    "   SET customer_name = (SELECT cust_last_name\n"+
+                    "                          FROM customers\n"+
+                    "                         WHERE customer_id = o.customer_id)\n\n"+
+                    "Which two are true? (Choose two.)",
     "answers": [
         {
             "answerText": "A. All existing rows in the ORDERS table are updated.",
@@ -297,282 +321,335 @@ export const questions: Question[] = [
     ],
     "help": "Community vote distribution: C(100%)"
   },
-{
+  {
     "questionId": "11",
     "questionTypeId": "MC",
-    "questionText": "",
+    "questionText": "Which three are true about scalar subquery expressions? (Choose three.)",
     "answers": [
         {
-            "answerText": "A. ",
+            "answerText": "A. They can be nested.",
             "isCorrect": true
         },
         {
-            "answerText": "B. ",
-            "isCorrect": true
-        },
-        {
-            "answerText": "C. ",
+            "answerText": "B. They cannot be used in the VALUES clause of an INSERT statement.",
             "isCorrect": false
         },
         {
-            "answerText": "D. ",
+            "answerText": "C. A scalar subquery expression that returns zero rows evaluates to zero.",
+            "isCorrect": false
+        },
+        {
+            "answerText": "D. They can be used as default values for columns in a CREATE TABLE statement.",
+            "isCorrect": false
+        },
+        {
+            "answerText": "E. A scalar subquery expression that returns zero rows evaluates to NULL.",
             "isCorrect": true
         },
         {
-            "answerText": "E. ",
+            "answerText": "F. They cannot be used in GROUP BY clauses.",
             "isCorrect": true
         }
     ],
-    "help": ""
+    "help": "Reference: https://docs.oracle.com/cd/B12037_01/server.101/b10759/expressions010.htm\nCommunity vote distribution: AEF (80%)  BEF (20%)"
 },
 {
     "questionId": "12",
     "questionTypeId": "MC",
-    "questionText": "",
+    "questionText": "Examine this query:\n\n"+
+                    "SELECT employee id, first name, salary\n"+
+                    "  FROM employees\n"+
+                    " WHERE hire date > '&l';\n\n"+
+                    "Which two methods should you use to prevent prompting for \n"+
+                    "a hire date value when this query is executed? (Choose two.)",
     "answers": [
         {
-            "answerText": "A. ",
+            "answerText": "A. Use the DEFINE command before executing the query.",
             "isCorrect": true
         },
         {
-            "answerText": "B. ",
-            "isCorrect": true
-        },
-        {
-            "answerText": "C. ",
+            "answerText": "B. Replace '&1' with '&&1' in the query.",
             "isCorrect": false
         },
         {
-            "answerText": "D. ",
-            "isCorrect": true
+            "answerText": "C. Use the UNDEFINE command before executing the query.",
+            "isCorrect": false
         },
         {
-            "answerText": "E. ",
+            "answerText": "D. Execute the SET VERIFY OFF command before executing the query.",
+            "isCorrect": false
+        },
+        {
+            "answerText": "E. Execute the SET VERIFY ON command before executing the query.",
+            "isCorrect": false
+        },
+        {
+            "answerText": "F. Store the query in a script and pass the substitution value to the script when executing it.",
             "isCorrect": true
         }
     ],
-    "help": ""
+    "help": "Community vote distribution: AF (75%) AB (25%)"
 },
 {
     "questionId": "13",
     "questionTypeId": "MC",
-    "questionText": "",
+    "questionText": "You need to allow user ANDREW to:\n"+
+                    "1. Modify the TITLE and ADDRESS columns of your CUSTOMERS table.\n"+
+                    "2. GRANT that permission to other users\n"+
+                    "Which statement will do this?",
     "answers": [
         {
-            "answerText": "A. ",
-            "isCorrect": true
-        },
-        {
-            "answerText": "B. ",
-            "isCorrect": true
-        },
-        {
-            "answerText": "C. ",
+            "answerText": "A. GRANT UPDATE ON customers.title, customers.address TO andrew;",
             "isCorrect": false
         },
         {
-            "answerText": "D. ",
+            "answerText": "B. GRANT UPDATE (title, address) ON customers TO andrew:",
+            "isCorrect": false
+        },
+        {
+            "answerText": "C. GRANT UPDATE (title, address) ON customers TO andrew WITH GRANT OPTION.",
             "isCorrect": true
         },
         {
-            "answerText": "E. ",
+            "answerText": "D. GRANT UPDATE ON customers.title, customers.address TO andrew WITH ADMIN OPTION;",
+            "isCorrect": false
+        },
+        {
+            "answerText": "E. GRANT UPDATE ON customers.title, customers.address TO andrew WITH GRANT OPTION;",
             "isCorrect": true
+        },
+        {
+            "answerText": "F. GRANT UPDATE (title, address) ON customers TO andrew WITH ADMIN OPTION;",
+            "isCorrect": false
         }
     ],
-    "help": ""
+    "help": "Community vote distribution: CE (100%)"
 },
 {
     "questionId": "14",
     "questionTypeId": "MC",
-    "questionText": "",
+    "questionText": "You own table DEPARTMENTS, referenced by views, indexes, and synonyms.\n"+
+                    "Examine this command which executes successfully:\n\n"+
+                    "DROP TABLE departments PURGE;\n\n"+
+                    "Which three statements are true? (Choose three.)",
     "answers": [
         {
-            "answerText": "A. ",
+            "answerText": "A. It will remove the DEPARTMENTS table from the database.",
             "isCorrect": true
         },
         {
-            "answerText": "B. ",
+            "answerText": "B. It will drop all indexes on the DEPARTMENTS table.",
             "isCorrect": true
         },
         {
-            "answerText": "C. ",
+            "answerText": "C. It will remove all views that are based on the DEPARTMENTS table.",
             "isCorrect": false
         },
         {
-            "answerText": "D. ",
+            "answerText": "D. It will remove all synonyms for the DEPARTMENTS table.",
+            "isCorrect": false
+        },
+        {
+            "answerText": "E. Neither can it be rolled back nor can the DEPARTMENTS table be recovered.",
             "isCorrect": true
         },
         {
-            "answerText": "E. ",
-            "isCorrect": true
+            "answerText": "F. It will delete all rows from the DEPARTMENTS table, but retain the empty table.",
+            "isCorrect": false
         }
     ],
-    "help": ""
+    "help": "Reference: https://docs.oracle.com/cd/B28359_01/server.111/b28310/tables010.htm#ADMIN01505\nCommunity vote distribution: ABE (86%)"
 },
 {
     "questionId": "15",
     "questionTypeId": "MC",
-    "questionText": "",
+    "questionText": "Which three statements are true about Structured Query Language (SQL)? (Choose three.)",
     "answers": [
         {
-            "answerText": "A. ",
-            "isCorrect": true
-        },
-        {
-            "answerText": "B. ",
-            "isCorrect": true
-        },
-        {
-            "answerText": "C. ",
+            "answerText": "A. It requires that data be contained in hierarchical data storage.",
             "isCorrect": false
         },
         {
-            "answerText": "D. ",
+            "answerText": "B. It best supports relational databases.",
             "isCorrect": true
         },
         {
-            "answerText": "E. ",
+            "answerText": "C. It provides independence for logical data structures being manipulated from the underlying physical data storage.",
             "isCorrect": true
+        },
+        {
+            "answerText": "D. It is the only language that can be used for both relational and object-oriented databases.",
+            "isCorrect": false
+        },
+        {
+            "answerText": "E. It guarantees atomicity, consistency, isolation, and durability (ACD) features.",
+            "isCorrect": true
+        },
+        {
+            "answerText": "F. It is used to define encapsulation and polymorphism for a relational table.",
+            "isCorrect": false
         }
     ],
-    "help": ""
+    "help": "Community vote distribution: BCE (100%)"
 },
 {
     "questionId": "16",
     "questionTypeId": "MC",
-    "questionText": "",
+    "questionText": "Which two statements are true about Oracle synonyms? (Choose two.)",
     "answers": [
         {
-            "answerText": "A. ",
-            "isCorrect": true
-        },
-        {
-            "answerText": "B. ",
-            "isCorrect": true
-        },
-        {
-            "answerText": "C. ",
+            "answerText": "A. Any user can create a PUBLIC synonym.",
             "isCorrect": false
         },
         {
-            "answerText": "D. ",
+            "answerText": "B. A synonym has an object number.",
             "isCorrect": true
         },
         {
-            "answerText": "E. ",
+            "answerText": "C. All private synonym names must be unique in the database.",
+            "isCorrect": false
+        },
+        {
+            "answerText": "D. A synonym can be created on an object in a package.",
+            "isCorrect": false
+        },
+        {
+            "answerText": "E. A synonym can have a synonym.",
             "isCorrect": true
         }
     ],
-    "help": ""
+    "help": "Community vote distribution: DE (56%) BE (44%)"
 },
 {
     "questionId": "17",
-    "questionTypeId": "SC",
-    "questionText": "",
+    "questionTypeId": "MC",
+    "questionText": "Which is true about the ROUND, TRUNC and MOD functions?",
     "answers": [
         {
-            "answerText": "A. true",
+            "answerText": "A. TRUNC(MOD(25,3),-1) is invalid.",
+            "isCorrect": false
+        },
+        {
+            "answerText": "B. ROUND(MOD(25,3),-1) is invalid.",
+            "isCorrect": false
+        },
+        {
+            "answerText": "C. ROUND(MOD(25,3),-1) and TRUNC(MOD(25,3),-1) are both valid and give the same result.",
             "isCorrect": true
         },
         {
-            "answerText": "B. false",
-            "isCorrect": false
-        },
-        {
-            "answerText": "C. false",
-            "isCorrect": false
-        },
-        {
-            "answerText": "D. false",
+            "answerText": "D. ROUND(MOD(25,3),-1) and TRUNC(MOD(25,3),-1) are both valid but give different results.",
             "isCorrect": false
         }
     ],
-    "help": "Hilfe"
+    "help": "Community vote distribution: C (100%)"
 },
 {
     "questionId": "18",
-    "questionTypeId": "SC",
-    "questionText": "",
+    "questionTypeId": "MC",
+    "questionText": "Which two are true about transactions in the Oracle Database? (Choose two.)",
     "answers": [
         {
-            "answerText": "A. ",
-            "isCorrect": true
-        },
-        {
-            "answerText": "B. ",
-            "isCorrect": true
-        },
-        {
-            "answerText": "C. ",
+            "answerText": "A. DML statements always start new transactions.",
             "isCorrect": false
         },
         {
-            "answerText": "D. ",
+            "answerText": "B. DDL statements automatically commit only data dictionary updates caused by executing the DDL.",
+            "isCorrect": false
+        },
+        {
+            "answerText": "C. A session can see uncommitted updates made by the same user in a different session.",
+            "isCorrect": false
+        },
+        {
+            "answerText": "D. A DDL statement issued by a session with an uncommitted transaction automatically commits that transaction.",
             "isCorrect": true
         },
         {
-            "answerText": "E. ",
+            "answerText": "E. An uncommitted transaction is automatically committed when the user exits SQL*Plus.",
             "isCorrect": true
         }
     ],
-    "help": ""
+    "help": "Community vote distribution: DE (67%) BD (3%)"
 },
 {
     "questionId": "19",
-    "questionTypeId": "SC",
-    "questionText": "",
+    "questionTypeId": "MC",
+    "questionText": "Examine the description of the MEMBERS table:\n\n"+
+                    "Name        Null?     Type\n"+
+                    "----------  --------  ------------\n"+
+                    "MEMBER_ID   NOT NULL  VARCHAR2(6)\n"+
+                    "FIRST_NAME            VARCHAR2(50)\n"+
+                    "LAST_NAME   NOT NULL  VARCHAR2(50)\n"+
+                    "CITY                  VARCHAR2(25)\n\n"+
+                    "Examine the partial query:\n\n"+
+                    "SELECT city, last_name AS Iname FROM members ...\n\n"+
+                    "You want to display all cities that contain the string AN.\n"+
+                    "The cities must be returned in ascending order, with the last names further sorted in descending order.\n"+
+                    "Which two clauses must you add to the query? (Choose two.)",
     "answers": [
         {
-            "answerText": "A. ",
-            "isCorrect": true
-        },
-        {
-            "answerText": "B. ",
-            "isCorrect": true
-        },
-        {
-            "answerText": "C. ",
+            "answerText": "A. ORDER BY 1,2",
             "isCorrect": false
         },
         {
-            "answerText": "D. ",
+            "answerText": "B. ORDER BY 1, Iname DESC",
             "isCorrect": true
         },
         {
-            "answerText": "E. ",
+            "answerText": "C. WHERE city IN ('%AN%')",
+            "isCorrect": false
+        },
+        {
+            "answerText": "D. WHERE city = '%AN%'",
+            "isCorrect": false
+        },
+        {
+            "answerText": "E. WHERE city LIKE '%AN%'",
             "isCorrect": true
+        },
+        {
+            "answerText": "F. ORDER BY last_name DESC, City ASC",
+            "isCorrect": false
         }
     ],
-    "help": ""
+    "help": "Community vote distribution: BE (82%)"
 },
 {
     "questionId": "20",
-    "questionTypeId": "SC",
-    "questionText": "",
+    "questionTypeId": "MC",
+    "questionText": "Examine this partial command:\n\n"+
+                    "CREATE TABLE cust(\n"+
+                    "  cust_id      NUMBER(2),\n"+
+                    "  credit_limit NUMBER(10)\n"+
+                    ") ORGANIZATION EXTERNAL\n\n"+
+                    "Which two clauses are required for this command to execute successfully? (Choose two.)",
     "answers": [
         {
-            "answerText": "A. ",
-            "isCorrect": true
-        },
-        {
-            "answerText": "B. ",
-            "isCorrect": true
-        },
-        {
-            "answerText": "C. ",
+            "answerText": "A. the access driver TYPE clause",
             "isCorrect": false
         },
         {
-            "answerText": "D. ",
+            "answerText": "B. the DEFAULT DIRECTORY clause",
             "isCorrect": true
         },
         {
-            "answerText": "E. ",
+            "answerText": "C. the REJECT LIMIT clause",
+            "isCorrect": false
+        },
+        {
+            "answerText": "D. the LOCATION clause",
             "isCorrect": true
+        },
+        {
+            "answerText": "E. the ACCESS PARAMETERS clause",
+            "isCorrect": false
         }
     ],
-    "help": ""
+    "help": "Community vote distribution: BD (100%)"
 },
+
+
 {
     "questionId": "21",
     "questionTypeId": "SC",

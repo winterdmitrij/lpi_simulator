@@ -84,6 +84,14 @@ export class TrainingComponent implements OnInit{
     this.curQuestion = this.questions[this.curQuestionNumber];
   }
 
+
+  frmText(pinStr: string): string {
+    let tmpStr: string;
+    tmpStr = pinStr.replace("/n", "<br />");
+
+    return tmpStr
+  }
+
 //--------------------- Benutzersantwort-Analyse ----------------------------
   /**
    * Benutzer-Antwort prüfen

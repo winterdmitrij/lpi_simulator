@@ -8,14 +8,19 @@
             <div>
                 <h6> <b>Frage Nr. {{ curQuestion.questionId }}</b> </h6>
             </div>
+            <hr>
             <div>
+                <!--
                 <div [innerHTML]="curQuestion.questionText"></div>
+                -->
+                <pre> {{ curQuestion.questionText }}  </pre>
             </div>
         </div>
 
         <!-- Information -->
         <div class="col-md-4 bg-success">
             <h6 class="text-center"> <b>INFORMATION</b> </h6>
+            <hr>
             <p class="text-center">Frage: {{ curQuestionNumber + 1 }} / {{ questions.length }} </p>
             <h6 class="text-center"> <b>DAVON</b> </h6>
             <p class="text-center">Falsch: {{ numOfUncorrect }} / {{ questions.length }} </p>
@@ -43,7 +48,7 @@
                 <span *ngIf="exam">
                     <input  type="checkbox" *ngIf="a.givenAnswer" checked (click)="a.givenAnswer=!a.givenAnswer">
                     <input  type="checkbox" *ngIf="!a.givenAnswer" unchecked (click)="a.givenAnswer=!a.givenAnswer">
-                    <span *ngIf="a.isCorrect" [ngClass]="{correct:true}">{{a.answerText}}</span>
+                    <span *ngIf="a.isCorrect" [ngClass]="{correct:true}">{{ a.answerText }} </span>
                     <span *ngIf="!a.isCorrect && a.givenAnswer" [ngClass]="{incorrect:true}">{{a.answerText}}</span>
                     <span *ngIf="!a.isCorrect && !a.givenAnswer">{{a.answerText}}</span>
                 </span>
