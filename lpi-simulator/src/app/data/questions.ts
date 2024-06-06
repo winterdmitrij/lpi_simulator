@@ -522,7 +522,7 @@ export const questions: Question[] = [
 },
 {
     "questionId": "17",
-    "questionTypeId": "MC",
+    "questionTypeId": "SC",
     "questionText": "Which is true about the ROUND, TRUNC and MOD functions?",
     "answers": [
         {
@@ -648,118 +648,165 @@ export const questions: Question[] = [
     ],
     "help": "Community vote distribution: BD (100%)"
 },
-
-
 {
     "questionId": "21",
-    "questionTypeId": "SC",
-    "questionText": "",
+    "questionTypeId": "MC",
+    "questionText": "Which two are true about unused columns? (Choose two.)",
     "answers": [
         {
-            "answerText": "A. ",
-            "isCorrect": true
-        },
-        {
-            "answerText": "B. ",
-            "isCorrect": true
-        },
-        {
-            "answerText": "C. ",
+            "answerText": "A. A query can return data from unused columns, but no DML is possible on those columns.",
             "isCorrect": false
         },
         {
-            "answerText": "D. ",
+            "answerText": "B. Unused columns retain their data until they are dropped.",
             "isCorrect": true
         },
         {
-            "answerText": "E. ",
+            "answerText": "C. Once a column has been set to unused, a new column with the same name can be added to the table.",
             "isCorrect": true
+        },
+        {
+            "answerText": "D. The DESCRIBE command displays unused columns.",
+            "isCorrect": false
+        },
+        {
+            "answerText": "E. A primary key column cannot be set to unused.",
+            "isCorrect": false
+        },
+        {
+            "answerText": "F. A foreign key column cannot be set to unused.",
+            "isCorrect": false
         }
     ],
-    "help": ""
+    "help": "Community vote distribution: BC (100%)"
 },
 {
     "questionId": "22",
-    "questionTypeId": "SC",
-    "questionText": "",
+    "questionTypeId": "MC",
+    "questionText": "Which two are true about the precedence of operators and conditions? (Choose two.)",
     "answers": [
         {
-            "answerText": "A. ",
-            "isCorrect": true
-        },
-        {
-            "answerText": "B. ",
-            "isCorrect": true
-        },
-        {
-            "answerText": "C. ",
+            "answerText": "A. || has a higher order of precedence than + (addition).",
             "isCorrect": false
         },
         {
-            "answerText": "D. ",
+            "answerText": "B. + (addition) has a higher order of precedence than * (multiplication).",
+            "isCorrect": false
+        },
+        {
+            "answerText": "C. NOT has a higher order of precedence than AND and OR in a condition.",
             "isCorrect": true
         },
         {
-            "answerText": "E. ",
+            "answerText": "D. AND and OR have the same order of precedence in a condition.",
+            "isCorrect": false
+        },
+        {
+            "answerText": "E. Operators are evaluated before conditions.",
             "isCorrect": true
         }
     ],
-    "help": ""
+    "help": "Community vote distribution: CE (100%)"
 },
 {
     "questionId": "23",
     "questionTypeId": "SC",
-    "questionText": "",
+    "questionText": "In your session, the NLS_DATE_FORMAT is DD-MM-YYYY.\n"+
+                    "There are 86400 seconds in a day.\n"+
+                    "Examine this result:\n\n"+
+                    "DATE-\n"+
+                    "-------\n"+
+                    "02-JAN-2020\n\n"+
+                    "Which statement returns this?",
     "answers": [
         {
-            "answerText": "A. ",
-            "isCorrect": true
-        },
-        {
-            "answerText": "B. ",
-            "isCorrect": true
-        },
-        {
-            "answerText": "C. ",
+            "answerText": "A. SELECT TO_CHAR(TO_DATE('29-10-2019') + INTERVAL '2' MONTH + INTERVAL '4' DAY - INTERVAL '120' SECOND, 'DD-MON-YYYY') AS \"date\" FROM DUAL;",
             "isCorrect": false
         },
         {
-            "answerText": "D. ",
-            "isCorrect": true
+            "answerText": "B. SELECT TO_CHAR(TO_DATE('29-10-2019') + INTERVAL '3' MONTH + INTERVAL '7' DAY - INTERVAL '360' SECOND, 'DD-MON-YYYY') AS \"date\" FROM DUAL;",
+            "isCorrect": false
         },
         {
-            "answerText": "E. ",
+            "answerText": "C. SELECT TO_CHAR(TO_DATE('29-10-2019') + INTERVAL '2' MONTH + INTERVAL '5' DAY - INTERVAL '120' SECOND, 'DD-MON-YYYY') AS \"date\" FROM DUAL;",
+            "isCorrect": false
+        },
+        {
+            "answerText": "D. SELECT TO_CHAR(TO_DATE('29-10-2019') + INTERVAL '2' MONTH + INTERVAL '5' DAY - INTERVAL '86410' SECOND, 'DD-MON-YYYY') AS \"date\" FROM DUAL;",
+            "isCorrect": false
+        },
+        {
+            "answerText": "E. SELECT TO_CHAR(TO_DATE('29-10-2019') + INTERVAL '2' MONTH + INTERVAL '6' DAY - INTERVAL '120' SECOND, 'DD-MON-YYYY') AS \"date\" FROM DUAL;",
             "isCorrect": true
         }
     ],
-    "help": ""
+    "help": "Community vote distribution: E (100%)"
 },
 {
     "questionId": "24",
     "questionTypeId": "SC",
-    "questionText": "",
+    "questionText": "Examine the data in the INVOICES table:\n\n"+
+                    "INVOICE_ID  CURRENCY_CODE  RAISED_DATE\n"+
+                    "----------  -------------  -----------\n"+
+                    "         1  EUR            01-JAN-2019\n"+
+                    "         2  USD            01-FEB-2019\n"+
+                    "         3  JPY            01-MAR-2019\n\n"+
+                    "Examine the data in the CURRENCIES table:\n\n"+
+                    "CURRENCY_CODE\n"+
+                    "-------------\n"+
+                    "JPY\n"+
+                    "GPB\n"+
+                    "CAD\n"+
+                    "EUR\n"+
+                    "USD\n\n"+
+                    "Which query returns the currencies in CURRENCIES that are not present in INVOICES?",
     "answers": [
         {
-            "answerText": "A. ",
-            "isCorrect": true
-        },
-        {
-            "answerText": "B. ",
-            "isCorrect": true
-        },
-        {
-            "answerText": "C. ",
+            "answerText": "A. SELECT * FROM currencies\n    WHERE NOT EXISTS (SELECT NULL FROM invoices \n   	                   WHERE currency_code);",
             "isCorrect": false
         },
         {
-            "answerText": "D. ",
+            "answerText": "B. SELECT * FROM currencies\n   MINUS\n   SELECT * FROM invoices;",
+            "isCorrect": false
+        },
+        {
+            "answerText": "C. SELECT currency_code FROM currencies\n   MINUS\n   SELECT currency_code FROM invoices;",
             "isCorrect": true
         },
         {
-            "answerText": "E. ",
+            "answerText": "D. SELECT currency_code FROM currencies\n   INTERSECT\n   SELECT currency_code FROM invoices;",
+            "isCorrect": false
+        }
+    ],
+    "help": "Community vote distribution: C (100%)"
+},
+{
+    "questionId": "25",
+    "questionTypeId": "MC",
+    "questionText": "The SALES table has columns PROD_ID and QUANTITY_SOLD of data type NUMBER.\n"+
+                    "Which two queries execute successfully? (Choose two.)",
+    "answers": [
+        {
+            "answerText": "A. SELECT prod_id FROM sales WHERE quantity_sold > 55000 AND COUNT(*) > 10 GROUP BY COUNT(*) > 10;",
+            "isCorrect": false
+        },
+        {
+            "answerText": "B. SELECT prod_id FROM sales WHERE quantity_sold > 55000 GROUP BY prod_id HAVING COUNT(*) > 10;",
+            "isCorrect": true
+        },
+        {
+            "answerText": "C. SELECT COUNT(prod_id) FROM sales GROUP BY prod_id WHERE quantity_sold > 55000;",
+            "isCorrect": false
+        },
+        {
+            "answerText": "D. SELECT prod_id FROM sales WHERE quantity_sold > 55000 AND COUNT (*) > 10 GROUP BY prod_id HAVING COUNT(*) > 10;",
+            "isCorrect": false
+        },
+        {
+            "answerText": "E. SELECT COUNT(prod_id) FROM sales WHERE quantity_sold > 5000 GROUP BY prod_id;",
             "isCorrect": true
         }
     ],
-    "help": ""
+    "help": "Community vote distribution: BE (100%)"
 }
 ]

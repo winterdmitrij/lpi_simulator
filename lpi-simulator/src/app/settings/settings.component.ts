@@ -27,17 +27,17 @@ export class SettingsComponent implements OnInit{
   ) { }
 
   ngOnInit(): void {
+    // Arrays aus Fragentypen und Mengen erhalten
+    this.questionTypes = this.qts.getAllQuestionTypes();
+    this.questionCounts = this.qts.getAllQuestionNumbers();
+    this.pageNumbers = this.getPageNumbers();
+    
     // ReactiveForm initialisieren
     this.form = new FormGroup({
       questTypeId: new FormControl('ALL', Validators.required),
       questCount: new FormControl('10', Validators.required),
       pageNumber: new FormControl('1', Validators.required)
-    })
-
-    // Arrays aus Fragentypen und Mengen erhalten
-    this.questionTypes = this.qts.getAllQuestionTypes();
-    this.questionCounts = this.qts.getAllQuestionNumbers();
-    this.pageNumbers = this.getPageNumbers();
+    });
   }
 
   onSubmit() {
