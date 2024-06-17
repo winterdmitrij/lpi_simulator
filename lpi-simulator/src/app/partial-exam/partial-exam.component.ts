@@ -34,12 +34,13 @@ export class PartialExamComponent implements OnInit{
 
   ngOnInit(): void {
     // ToDo: Random-Fragenpull generieren
-    this.questions = this.qs.generateRndQuestionPul();
+    this.questions = this.qs.getRndQuestionsBy();
     
     // Fragenpull durchgehen und
     this.questions.map(quest => {
       // - Antworten-Array erstellen und befüllen
       this.userAnswers.push(this.userAnswer = {
+        questionNum: 1,
         questionId: quest.questionId, // mit Frage-Id
         isAnswered: false,            // mit unbeantwortet
         isCorrect: false              // mit falsh
@@ -83,6 +84,7 @@ export class PartialExamComponent implements OnInit{
 
     // erzeugen Objekt: userAnswer
     this.userAnswer = {
+      questionNum: this.curQuestionNumber,
       questionId: this.curQuestion.questionId,
       isAnswered: isAnswered,
       isCorrect: isCorrect

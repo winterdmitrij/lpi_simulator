@@ -1,94 +1,46 @@
 import { Injectable } from "@angular/core";
-import { questions as quests} from '../data/questions';
+//import { questions as quests} from '../data/questions';
+import { questions as quests} from '../data/mark-questions';
 import { Question } from '../models/definitions';
 
 
 @Injectable({ providedIn: 'root' })
 export class QuestionsService {
-    typeIdOfQuestions: string;      // Fragentypen
-    countOfQuestions: number;       // Fragenanzahl
-    pageNumber: number;             // Seitennummer
-
     questions: Question[];          // Fragenpull
 
     constructor() {
-        this.questions = quests;    // Fragenpull aus der Datei /models/questsion.ts erhalten
+        this.questions = quests;    // Fragenpull aus der Datei /models/*.ts erhalten
     }
 
+
     /**
-     * Getters und Setters
+     * Gibt das kompletten Fragen-Array zurück.
      * @returns 
      */
-    // Fragentype
-    getTypeIdOfQuestions(): string {
-        return this.typeIdOfQuestions;
-    }
-
-    setTypeIdOfQuestions(inTypeId: string) {
-        this.typeIdOfQuestions = inTypeId;
-    }
-
-    // Fragenanzahl
-    getCountOfQuestions(): number {
-        return this.countOfQuestions;
-    } 
-
-    setCountOfQuestions(inCount: number) {
-        this.countOfQuestions = inCount;
-    }
-
-    // Seitennummer
-    getPageNumber(): number {
-        return this.pageNumber;
-    }
-
-    setPageNumber(inPageNum: number) {
-        this.pageNumber = inPageNum;
-    }
-
-    /**
-     * Fragenpull
-     */
-    // Gibt Fragen-Array ohne Filter zurück
     getAllQuestions():Question[] {
         return this.questions;
     }
 
-    // Gibt Fragen-Array bzgl. Fragentyp zurück
-    getQuestionsBy(inTypeId: string): Question[] {
-        let tmpQuestions: Question[] = this.questions; //.getAllQuestions(); //quests;
-        //console.log('tmp-Fragen', tmpQuestions);
-        
-        if (inTypeId == "ALL") {
-            tmpQuestions;
-        }
-        else
-        {
-            tmpQuestions = tmpQuestions.filter(q => q.questionTypeId === inTypeId);
-        };
-
-        return tmpQuestions;
-    }
-
-    // Gibt die Länge des Fr-Arrays bzgl. Fragentyp zurück
-    getQuestionsCountBy(inTypeId: string): number {
-        return this.getQuestionsBy(inTypeId).length;
-    }
-
-    // Generiert den Fragenpull bzgl. Fragentyp, Fragenanzahl und Seitennummer
-    generateQuestionsBy(inTypeId: string, inCount: number, inPageNum: number): Question[] {
-        // typesierten Fragenpull erhalten
-        let typQuestions: Question[] = this.getQuestionsBy(inTypeId);
-
+    /**
+     * Gibt das Fragen-Array zurück, bzgl.:
+     * @param inQuestionsCount  Fragenmenge
+     * @param inPageNum         Seitennummer, DEFAULT: 0
+     * @returns 
+     */
+    getQuestionsBy(inQuestionsCount: number, inPageNum: number = 1): Question[] {
         // Indexe
-        let strIdx: number = inCount * (inPageNum - 1);
-        let endInf: number = inCount * inPageNum; //this.getQuestionsCountBy(inTypeId) - inCount * inPageNum;
-        
-        return typQuestions.slice(strIdx, endInf);
+        let strIdx: number = inQuestionsCount * (inPageNum - 1);
+        let endInf: number = strIdx + inQuestionsCount;
+        return this.getAllQuestions().slice(strIdx, endInf);
     }
 
-    // Random-Fragepul generieren
-    generateRndQuestionPul(): Question[] {
+
+    /**
+     * Gibt das Array aus der zufälligen Fragen zurück, bzgl:
+     * @param inCount   // Fragen-Anzahl, DEFAULT: 60
+     * @returns 
+     */
+    getRndQuestionsBy(inCount: number = 60): Question[] {
         let rndIdx: number;
         let tmpQuestions: Question[] = this.getAllQuestions();
         let rndQuestions: Question[] = [];
@@ -103,6 +55,27 @@ export class QuestionsService {
             tmpQuestions.splice(rndIdx, 1);
         };
 
-        return rndQuestions.slice(0, 60);
+        return rndQuestions.slice(0, inCount);
+    }
+
+
+//  Fragenanzahl
+    /**
+     * Gibt die Anzahl der allen Fragen zurück.
+     * @returns 
+     */
+    getAllQuestionsCount(): number {
+        return this.questions.length;
+    }
+
+
+// Einziege Frage
+    /**
+     * Gibt die Frage zurück, bzgl.:
+     * @param inQuestionId  Frage-ID
+     * @returns 
+     */
+    getQuestionBy(inQuestionId: string): Question {
+        return this.questions.filter(quest => quest.questionId === inQuestionId)[0];
     }
 }

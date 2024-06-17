@@ -12,7 +12,7 @@ import { QuestionsService } from '../services/questions.service';
 })
 export class SettingsComponent implements OnInit{
   // Arrays für Ausfallliste
-  questionTypes: QuestionType[];  // Array der Fragentypen
+  questionsCount: number;          // Anzahl der Fragen insgesamt
   questionCounts: number[];       // Array der vorangestelten Fragenmengen
   pageNumbers: number[];          // Array der möglichen Seten
 
@@ -27,42 +27,34 @@ export class SettingsComponent implements OnInit{
   ) { }
 
   ngOnInit(): void {
-    // Arrays aus Fragentypen und Mengen erhalten
-    this.questionTypes = this.qts.getAllQuestionTypes();
-    this.questionCounts = this.qts.getAllQuestionNumbers();
-    this.pageNumbers = this.getPageNumbers();
-    
     // ReactiveForm initialisieren
     this.form = new FormGroup({
-      questTypeId: new FormControl('ALL', Validators.required),
       questCount: new FormControl('10', Validators.required),
       pageNumber: new FormControl('1', Validators.required)
     });
+
+    // Fragenmengen- und Seitennummern-Arrays erhalten
+    this.questionsCount = this.qs.getAllQuestionsCount();
+    this.questionCounts = this.qts.getAllQuestionNumbers();
+    this.pageNumbers = this.qts.getPagesArrayBy(this.questionsCount, this.form.value.questCount);
   }
 
   onSubmit() {
     // Zum Training weiterleiten, mit TypeId, Count und Page als QueryParams
     this.router.navigate(
-      ['/training', this.form.value.questTypeId],
+      ['/training'],
       {
         queryParams: {
           count: this.form.value.questCount,
-          page: this.form.value.pageNumber
+          page: this.form.value.pageNumber,
+          num: 1
         } 
       }
     );
   }
 
   getPageNumbers(): number[]{
-    // Fragenanzahl ermitteln
-    let allQuestionCount: number = this.qs.getQuestionsCountBy(this.form.value.questTypeId);
-    //console.log('Test Fragenanzahl:', allQuestionCount);
-    
-    // Seitenanzahl ermitteln
-    let pageCount: number = Math.ceil(allQuestionCount / this.form.value.questCount);
-    //console.log('Test Seitenanzahl: ', pageCount);
-    
-    return this.qts.getAllPageNumbersBy(pageCount);
+    return this.pageNumbers = this.qts.getPagesArrayBy(this.questionsCount, this.form.value.questCount);
   }
 
   onChange() {

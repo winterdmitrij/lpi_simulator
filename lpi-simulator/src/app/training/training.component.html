@@ -1,145 +1,156 @@
-<h2 class="text-center"> <b>Lernmodus</b> </h2>
+<h2 class="text-center"><b>Lernmodus</b></h2>
 
-<!-- Fragestellung und Info -->
-<div class="container">
+<!-- Information -->
+<div class="container bg-secondary">
     <div class="row">
-        <!-- Fragestellung -->
-        <div class="container col-md-8 bg-info">
-            <div>
-                <h6> <b>Frage Nr. {{ curQuestion.questionId }}</b> </h6>
-            </div>
-            <hr>
-            <div>
-                <!--
-                <div [innerHTML]="curQuestion.questionText"></div>
-                -->
-                <pre> {{ curQuestion.questionText }}  </pre>
-            </div>
+        <div class="col-md-3">
+            <span><b>Frage:</b> {{ curQuestionNumber + 1 }} / {{ questions.length }}</span>
         </div>
-
-        <!-- Information -->
-        <div class="col-md-4 bg-success">
-            <h6 class="text-center"> <b>INFORMATION</b> </h6>
-            <hr>
-            <p class="text-center">Frage: {{ curQuestionNumber + 1 }} / {{ questions.length }} </p>
-            <h6 class="text-center"> <b>DAVON</b> </h6>
-            <p class="text-center">Falsch: {{ numOfUncorrect }} / {{ questions.length }} </p>
-            <p class="text-center">Richtig: {{ numOfCorrect }} / {{ questions.length }} </p>
-            <p class="text-center">Unbeantwortet: {{ numOfUnanswered }} / {{ questions.length }} </p>
+        <div class="col-md-3">
+            <span><b>Falsch:</b> {{ uncorrectsCount }} / {{ questions.length }}</span>
+        </div>
+        <div class="col-md-3">
+            <span><b>Richtig:</b> {{ correctsCount }} / {{ questions.length }}</span>
+        </div>
+        <div class="col-md-3">
+            <span><b>Unbeantwortet:</b> {{ unansweredCount }} / {{ questions.length }}</span>
         </div>
     </div>
 </div>
 <hr>
+
+<!-- Fragestellung -->
+<div class="container bg-info">
+  <div>
+      <h6><b>Question ID: {{ curQuestion.questionId }}</b></h6>
+  </div>
+  <hr>
+  <div>
+      <pre>{{ curQuestion.questionText }}</pre>
+  </div>
+</div>
 
 <!-- Antwortbereich -->
 <div class="container bg-info">
-        <br>
-        <div *ngFor="let a of curQuestion.answers">
+  <div *ngFor="let a of curQuestion.answers">
 
-            <!-- Multiple-Choice-Frage -->
-            <div class="checkbox" *ngIf="curQuestion.questionTypeId==='MC'">
+      <!-- Multiple-Choice-Frage -->
+      <div class="checkbox" *ngIf="curQuestion.questionTypeId==='MC'">
 
-                <span *ngIf="!exam">
-                    <input  type="checkbox" *ngIf="a.givenAnswer" checked (click)="a.givenAnswer=!a.givenAnswer">
-                    <input  type="checkbox" *ngIf="!a.givenAnswer" unchecked (click)="a.givenAnswer=!a.givenAnswer">
-                    <span>{{a.answerText}} </span>
-                </span>
+          <span *ngIf="!exam">
+              <input  type="checkbox" *ngIf="a.givenAnswer" checked (click)="a.givenAnswer=!a.givenAnswer">
+              <input  type="checkbox" *ngIf="!a.givenAnswer" unchecked (click)="a.givenAnswer=!a.givenAnswer">
+              <span> {{ a.answerText }} </span>
+          </span>
 
-                <span *ngIf="exam">
-                    <input  type="checkbox" *ngIf="a.givenAnswer" checked (click)="a.givenAnswer=!a.givenAnswer">
-                    <input  type="checkbox" *ngIf="!a.givenAnswer" unchecked (click)="a.givenAnswer=!a.givenAnswer">
-                    <span *ngIf="a.isCorrect" [ngClass]="{correct:true}">{{ a.answerText }} </span>
-                    <span *ngIf="!a.isCorrect && a.givenAnswer" [ngClass]="{incorrect:true}">{{a.answerText}}</span>
-                    <span *ngIf="!a.isCorrect && !a.givenAnswer">{{a.answerText}}</span>
-                </span>
-            </div>
+          <span *ngIf="exam">
+              <input  type="checkbox" *ngIf="a.givenAnswer" checked (click)="a.givenAnswer=!a.givenAnswer">
+              <input  type="checkbox" *ngIf="!a.givenAnswer" unchecked (click)="a.givenAnswer=!a.givenAnswer">
+              <span *ngIf="a.isCorrect" [ngClass]="{correct:true}"> {{ a.answerText }} </span>
+              <span *ngIf="!a.isCorrect && a.givenAnswer" [ngClass]="{incorrect:true}"> {{ a.answerText }}</span>
+              <span *ngIf="!a.isCorrect && !a.givenAnswer"> {{ a.answerText }}</span>
+          </span>
+      </div>
 
-            <!-- Single-Choice-Frage -->
-            <div class="radio" *ngIf="curQuestion.questionTypeId==='SC'">
-               
-                <span *ngIf="!exam">
-                    <input  type="radio" name="a.givenAnswer" *ngIf="a.givenAnswer" checked>
-                    <input  type="radio" name="a.givenAnswer" *ngIf="!a.givenAnswer" unchecked (click)="deleteAnswer(); a.givenAnswer=!a.givenAnswer">
-                    <span>{{a.answerText}} </span>
-                </span>
+      <!-- Single-Choice-Frage -->
+      <div class="radio" *ngIf="curQuestion.questionTypeId==='SC'">
+         
+          <span *ngIf="!exam">
+              <input  type="radio" name="a.givenAnswer" *ngIf="a.givenAnswer" checked>
+              <input  type="radio" name="a.givenAnswer" *ngIf="!a.givenAnswer" unchecked (click)="deleteAnswer(); a.givenAnswer=!a.givenAnswer">
+              <span> {{ a.answerText }}</span>
+          </span>
 
-                <span *ngIf="exam">
-                    <input  type="radio" name="a.givenAnswer" *ngIf="a.givenAnswer" checked>
-                    <input  type="radio" name="a.givenAnswer" *ngIf="!a.givenAnswer" unchecked (click)="deleteAnswer(); a.givenAnswer=!a.givenAnswer">
-                    <span *ngIf="a.isCorrect" [ngClass]="{correct:true}">{{a.answerText}} </span>
-                    <span *ngIf="!a.isCorrect && a.givenAnswer" [ngClass]="{incorrect:true}">{{a.answerText}}</span>
-                    <span *ngIf="!a.isCorrect && !a.givenAnswer">{{a.answerText}}</span>
-                </span>
-            </div>
-        </div>
+          <span *ngIf="exam">
+              <input  type="radio" name="a.givenAnswer" *ngIf="a.givenAnswer" checked>
+              <input  type="radio" name="a.givenAnswer" *ngIf="!a.givenAnswer" unchecked (click)="deleteAnswer(); a.givenAnswer=!a.givenAnswer">
+              <span *ngIf="a.isCorrect" [ngClass]="{correct:true}"> {{ a.answerText }}</span>
+              <span *ngIf="!a.isCorrect && a.givenAnswer" [ngClass]="{incorrect:true}"> {{ a.answerText }}</span>
+              <span *ngIf="!a.isCorrect && !a.givenAnswer"> {{ a.answerText }}</span>
+          </span>
+      </div>
+  </div>
 </div>
-<hr>
+<br>
+
+<!-- Buttons -->
+<div class="container">
+  <div class="row">
+      <div class="container col-md-4">
+          <button 
+              type="button"
+              class="btn"
+              [ngClass]="{
+                  'btn-primary': !show,
+                  'btn-success': show
+              }"
+              (click)="showHelp()"
+              [disabled]="curQuestion.help===''"
+          >
+              Hilfe {{ show ? 'verstecken' : 'anzeigen' }}
+          </button>
+      </div>
+      <div class="container col-md-4">
+          <button 
+              type="button"
+              class="btn"
+              [ngClass]="{
+                  'btn-primary': !exam,
+                  'btn-success': exam
+              }"
+              (click)="showAnswer()"
+          >
+              {{ curQuestion.questionTypeId==='MC' ? 'Antworten' : 'Antwort' }} {{ exam ? 'verstecken' : 'anzeigen' }}
+          </button>
+      </div>
+      <div class="container col-md-4">
+        <button 
+            type="button"
+            class="btn btn-primary"
+            (click)="chkAnswer()"
+        >
+            Antwort geben
+        </button>
+    </div>
+  </div>
+</div>
+<br>
 
 <!-- Hilfe -->
 <div class="container bg-info" *ngIf="show">
-    <p>{{ curQuestion.help }} </p>
+  <p>{{ curQuestion.help ? curQuestion.help : "Keine Information" }} </p>
 </div>
 
+<hr>
 
 <!-- Navigation -->
-<div class="container">
-    <div class="row">
-        <div class="container col-md-3">
-            <button 
-                type="button"
-                class="btn btn-primary"
-                (click)="back()"
-                [disabled]="curQuestionNumber == 0"
-            >
-                Zur vorherigen Frage
-            </button>
-        </div>
-        <div class="container col-md-3">
-            <button 
-                type="button"    
-                class="btn btn-primary"
-                (click)="next()"
-                [disabled]="nextDisable"
-            >
-                Zur nächsten Frage
-            </button>
-        </div>
-        <div class="container col-md-3">
-            <button 
-                *ngIf="!show"
-                type="button"
-                class="btn btn-primary"
-                (click)="showHelp()"
-                [disabled]="curQuestion.help===''"
-            >
-                Hilfe anzeigen
-            </button>
-            <button 
-                *ngIf="show"
-                type="button"
-                class="btn btn-primary"
-                (click)="showHelp()"
-            >
-                Hilfe verstecken
-            </button>
-        </div>
-        <div class="container col-md-3">
-            <button 
-                *ngIf="curQuestion.questionTypeId==='MC'"
-                type="button"
-                class="btn btn-primary"
-                (click)="showAnswer()"
-            >
-                Richtige Antworten
-            </button>
-            <button 
-                *ngIf="curQuestion.questionTypeId==='SC'"
-                type="button"
-                class="btn btn-primary"
-                (click)="showAnswer()"
-            >
-                Richtige Antwort
-            </button>
-        </div>
-    </div>
-</div>
+ <div class="container">
+     <nav aria-label="Page navigation example">
+         <ul class="pagination justify-content-end">
+           <li class="page-item">
+             <a 
+               class="page-link" 
+               aria-label="Previous"
+               (click)="toPrev()"
+             >
+               <span aria-hidden="true">&laquo;</span>
+             </a>
+           </li>
+           <li 
+             class="page-item"
+             *ngFor="let question of questions; let i = index"
+           >
+             <a class="page-link" (click)="toPage(i)">{{ i + 1 }}</a>
+           </li>
+           <li class="page-item">
+             <a
+               class="page-link" 
+               aria-label="Next"
+               (click)="toNext()"
+              >
+               <span aria-hidden="true">&raquo;</span>
+             </a>
+           </li>
+         </ul>
+     </nav>
+ </div>

@@ -17,11 +17,11 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
-    path: 'training',
+    path: 'training/set',
     component: SettingsComponent,
   },
   {
-    path: 'training/:typeId',
+    path: 'training',
     component: TrainingComponent
   },
   {
