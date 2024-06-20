@@ -140,7 +140,16 @@
              class="page-item"
              *ngFor="let question of questions; let i = index"
            >
-             <a class="page-link" (click)="toPage(i)">{{ i + 1 }}</a>
+             <a 
+               class="page-link"
+               [ngClass]="{
+                 'active': curQuestionNumber === i,
+                 'disabled': curQuestionNumber !== i
+               }"
+               (click)="toPage(i)"
+             >
+               {{ i + 1 }}
+            </a>
            </li>
            <li class="page-item">
              <a

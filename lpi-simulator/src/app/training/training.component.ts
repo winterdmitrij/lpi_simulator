@@ -112,6 +112,8 @@ export class TrainingComponent implements OnInit{
    */
   toCurQuestion(){
     this.curQuestion = this.questions[this.curQuestionNumber];
+    this.show = false;
+    this.exam = false;
 
     this.router.navigate(
       ['/training'], // this.curQuestion.questionId],

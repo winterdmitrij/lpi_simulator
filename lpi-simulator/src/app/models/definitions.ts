@@ -3,6 +3,7 @@ export interface Question {
     questionTypeId: string,
     questionText: string,
     answers?: Answer[],
+    answer?: string,
     help?: string
 }
 
