@@ -135,7 +135,7 @@ export class TrainingComponent implements OnInit{
     // Antwort überprüfen
     this.chkAnswer();
 
-    if(this.curQuestionNumber > 1)
+    if(this.curQuestionNumber > 0)
     {
       this.curQuestionNumber--;
     }
@@ -160,11 +160,11 @@ export class TrainingComponent implements OnInit{
     this.chkAnswer();
 
     // Zur nächsten Question weiterleiten und Hilfe mit questionsprüfung ausblenden
-    if(this.curQuestionNumber < this.questionsCount)
-      {
-        this.curQuestionNumber++;
-      }
-      this.toCurQuestion();
+    if(this.curQuestionNumber < this.questionsCount - 1)
+    {
+      this.curQuestionNumber++;
+    }
+    this.toCurQuestion();
   };
 
 

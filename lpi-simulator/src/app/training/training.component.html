@@ -20,18 +20,18 @@
 <hr>
 
 <!-- Fragestellung -->
-<div class="container bg-info">
+<div class="container">
   <div>
       <h6><b>Question ID: {{ curQuestion.questionId }}</b></h6>
   </div>
   <hr>
   <div>
-      <pre>{{ curQuestion.questionText }}</pre>
+      <pre><b>{{ curQuestion.questionText }}</b></pre>
   </div>
 </div>
 
 <!-- Antwortbereich -->
-<div class="container bg-info">
+<div class="container">
   <div *ngFor="let a of curQuestion.answers">
 
       <!-- Multiple-Choice-Frage -->
@@ -81,11 +81,11 @@
               type="button"
               class="btn"
               [ngClass]="{
-                  'btn-primary': !show,
-                  'btn-success': show
+                  'btn-outline-primary': !show,
+                  'btn-outline-success': show,
+                  'disabled': curQuestion.help === '' || curQuestion.help === '-'
               }"
               (click)="showHelp()"
-              [disabled]="curQuestion.help===''"
           >
               Hilfe {{ show ? 'verstecken' : 'anzeigen' }}
           </button>
@@ -95,8 +95,8 @@
               type="button"
               class="btn"
               [ngClass]="{
-                  'btn-primary': !exam,
-                  'btn-success': exam
+                  'btn-outline-primary': !exam,
+                  'btn-outline-success': exam
               }"
               (click)="showAnswer()"
           >
@@ -106,7 +106,7 @@
       <div class="container col-md-4">
         <button 
             type="button"
-            class="btn btn-primary"
+            class="btn btn-outline-primary"
             (click)="chkAnswer()"
         >
             Antwort geben
@@ -118,48 +118,38 @@
 
 <!-- Hilfe -->
 <div class="container bg-info" *ngIf="show">
-  <p>{{ curQuestion.help ? curQuestion.help : "Keine Information" }} </p>
+  <pre>{{ curQuestion.help ? curQuestion.help : "Keine Information" }} </pre>
 </div>
 
 <hr>
 
-<!-- Navigation -->
+<!-- Navigation test -->
  <div class="container">
-     <nav aria-label="Page navigation example">
-         <ul class="pagination justify-content-end">
-           <li class="page-item">
-             <a 
-               class="page-link" 
-               aria-label="Previous"
-               (click)="toPrev()"
-             >
-               <span aria-hidden="true">&laquo;</span>
-             </a>
-           </li>
-           <li 
-             class="page-item"
-             *ngFor="let question of questions; let i = index"
-           >
-             <a 
-               class="page-link"
-               [ngClass]="{
-                 'active': curQuestionNumber === i,
-                 'disabled': curQuestionNumber !== i
-               }"
-               (click)="toPage(i)"
-             >
-               {{ i + 1 }}
-            </a>
-           </li>
-           <li class="page-item">
-             <a
-               class="page-link" 
-               aria-label="Next"
-               (click)="toNext()"
-              >
-               <span aria-hidden="true">&raquo;</span>
-             </a>
-           </li>
-         </ul>
-     </nav>
+  <nav>
+    <div class="btn-group" role="group" aria-label="Basic outlined example">
+      <button 
+        type="button" 
+        class="btn btn-outline-primary"
+        (click)="toPrev()"
+        [disabled]="curQuestionNumber === 0"
+      >&laquo;</button>
+      <button 
+        type="button" 
+        class="btn btn-outline-primary"
+        *ngFor="let answ of userAnswers; let i = index"
+        [ngClass]="{
+          'active': curQuestionNumber === i,
+          'btn-outline-success': userAnswers[i].isAnswered && userAnswers[i].isCorrect,
+          'btn-outline-danger': userAnswers[i].isAnswered && !userAnswers[i].isCorrect
+        }"
+        (click)="toPage(i)"
+      >{{ i + 1 }}</button>
+      <button 
+        type="button" 
+        class="btn btn-outline-primary"
+        (click)="toNext()"
+        [disabled]="curQuestionNumber === questions.length - 1"
+      >&raquo;</button>
+    </div>
+  </nav>
  </div>
