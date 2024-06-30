@@ -63,7 +63,8 @@ export class HalfExamComponent implements OnInit{
     });
 
     // Fragen-Array erhalten
-    this.questions = this.qs.getRndQuestionsBy(this.questionsCount);
+    // ToDo: Fragenpull!!!!!
+    this.questions = this.qs.getRndQuestionsBy("MQ", this.questionsCount);
 
     // Fragen-Array durchgehen und
     this.questions.map(quest => {

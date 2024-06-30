@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Question, UserAnswer } from '../models/definitions';
+import { Question, QuestionsPull, UserAnswer } from '../models/definitions';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { QuestionsService } from '../services/questions.service';
 import { QuestionTypeService } from '../services/question-types.service';
@@ -11,8 +11,10 @@ import { QuestionTypeService } from '../services/question-types.service';
 })
 export class TrainingComponent implements OnInit{
   // Query-Parameter
+  questionsPullId: string;        // Pragenpull-ID
   questionsCount: number;         // Fragenmenge
-  pageNumber: number;             // Seitennummer
+  pageNum: number;                // Seitennummer
+  
   curQuestionNumber: number;      // Reihennummer der aktuellen Frage
   
   // Fragen-Array
@@ -37,7 +39,7 @@ export class TrainingComponent implements OnInit{
 
   constructor(
     private qs: QuestionsService,
-    private qts: QuestionTypeService,
+//    private qts: QuestionTypeService,
     private router: Router,
     private route: ActivatedRoute
   ) { }
@@ -51,13 +53,14 @@ export class TrainingComponent implements OnInit{
     
     // Parameters der Adresszeile ablesen
     this.route.queryParams.subscribe((params: Params) => {
+      this.questionsPullId = params['quest']
       this.questionsCount = +params['count'],
-      this.pageNumber = +params['page'],
+      this.pageNum = +params['page'],
       this.curQuestionNumber = +params['num']-1
     });
 
     // Fragen-Array erhalten
-    this.questions = this.qs.getQuestionsBy(this.questionsCount, this.pageNumber);
+    this.questions = this.qs.getQuestionsBy(this.questionsPullId, this.questionsCount, this.pageNum);
 
     // Fragen-Array durchgehen und
     this.questions.map(quest => {
@@ -119,8 +122,9 @@ export class TrainingComponent implements OnInit{
       ['/training'], // this.curQuestion.questionId],
       {
         queryParams: {
+          quest: this.questionsPullId,
           count: this.questionsCount,
-          page: this.pageNumber,
+          page: this.pageNum,
           num: this.curQuestionNumber+1
         } 
       }
@@ -145,10 +149,10 @@ export class TrainingComponent implements OnInit{
 
   /**
    * Routing zur Frage, bzgl.:
-   * @param inPage  Index der Frage
+   * @param inpageNum  Index der Frage
    */
-  toPage(inPage: number) {
-    this.curQuestionNumber = inPage;
+  toPage(inpageNum: number) {
+    this.curQuestionNumber = inpageNum;
     this.toCurQuestion();
   }
 

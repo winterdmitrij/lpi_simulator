@@ -1314,6 +1314,40 @@ export const questions: Question[] = [
     help: '',
   },
   {
+    questionId: '32',
+    questionTypeId: 'MC',
+    questionText:
+      'ToDo: Die Frage fehlt',
+    answers: [
+      {
+        answerText: 'A. ',
+        isCorrect: true,
+      },
+      {
+        answerText: 'B. ',
+        isCorrect: false,
+      },
+      {
+        answerText: 'C. ',
+        isCorrect: true,
+      },
+      {
+        answerText: 'D. ',
+        isCorrect: true,
+      },
+      {
+        answerText: 'E. ',
+        isCorrect: false,
+      },
+      {
+        answerText: 'F. ',
+        isCorrect: false,
+      },
+    ],
+    answer: '',
+    help: '',
+  },
+  {
     questionId: '33',
     questionTypeId: 'SC',
     questionText:

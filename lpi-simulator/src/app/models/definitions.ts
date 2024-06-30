@@ -23,15 +23,21 @@ export interface UserAnswer {
     isCorrect: boolean      // wenn ja, war die Antwort richtig
 }
 
-// Fragentyp -- Brauche ich nicht --
+// Fragentyp -- Brauche ich nicht mehr --
 export interface QuestionType {
     name: string,
     id: string
 }
 
 // Fragen-Menge
-export interface QuestionsPul {
+export interface QuestionsPull {
     id: string,     // ID
-    name: string,   // von Sören
+    name: string,   // von Marc
     count: number   // Anzahl von Fragen
+}
+
+// Pages
+export interface Page {
+    num: number,
+    name: string
 }

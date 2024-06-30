@@ -8,20 +8,26 @@ import { Question } from '../models/definitions';
 
 @Injectable({ providedIn: 'root' })
 export class QuestionsService {
-    questions: Question[];          // Fragenpull
+    questions: Question[] = [];          // Fragenpull
 
     constructor() {
-        this.questions = quest1;    // Fragenpull aus der Datei /models/*.ts erhalten
+//        this.questions = quest1;    // Fragenpull aus der Datei /models/*.ts erhalten
     }
-
-
-
 
     /**
      * Gibt das kompletten Fragen-Array zurück.
      * @returns 
      */
-    getAllQuestions():Question[] {
+    getAllQuestionsBy(inQuestPullId: string = "MQ"):Question[] {
+        switch(inQuestPullId){
+            case "SQ":
+                this.questions = quest2;
+                break;
+            case "DQ":
+                this.questions = quest3;
+                break;
+            default: this.questions = quest1;
+        }
         return this.questions;
     }
 
@@ -31,11 +37,11 @@ export class QuestionsService {
      * @param inPageNum         Seitennummer, DEFAULT: 0
      * @returns 
      */
-    getQuestionsBy(inQuestionsCount: number, inPageNum: number = 1): Question[] {
+    getQuestionsBy(inQuestPullId: string, inQuestionsCount: number, inPageNum: number = 1): Question[] {
         // Indexe
         let strIdx: number = inQuestionsCount * (inPageNum - 1);
         let endInf: number = strIdx + inQuestionsCount;
-        return this.getAllQuestions().slice(strIdx, endInf);
+        return this.getAllQuestionsBy(inQuestPullId).slice(strIdx, endInf);
     }
 
 
@@ -44,9 +50,9 @@ export class QuestionsService {
      * @param inCount   // Fragen-Anzahl, DEFAULT: 60
      * @returns 
      */
-    getRndQuestionsBy(inCount: number = 60): Question[] {
+    getRndQuestionsBy(inQuestPullId: string = 'MQ', inCount: number = 60): Question[] {
         let rndIdx: number;
-        let tmpQuestions: Question[] = this.getAllQuestions();
+        let tmpQuestions: Question[] = this.getAllQuestionsBy(inQuestPullId);
         let rndQuestions: Question[] = [];
 
         // Randome Reihenfolge aus tmp-Fragen generieren
@@ -68,8 +74,8 @@ export class QuestionsService {
      * Gibt die Anzahl der allen Fragen zurück.
      * @returns 
      */
-    getAllQuestionsCount(): number {
-        return this.questions.length;
+    getAllQuestionsCount(inQuestPullId: string): number {
+        return this.getAllQuestionsBy(inQuestPullId).length;
     }
 
 

@@ -6,47 +6,46 @@
         [formGroup]="form"
         (ngSubmit)="onSubmit()"
     >
-        <!-- Fragentyp
-        <div 
-            class="form-group"
-        >
-            <label class="col-sm-4 control-label" for="select-questionType">Fragentypen:</label>
-            <select 
-                class="form-select form-select-lg mb-3" aria-label=".form-select-lg example"
-                formControlName="questTypeId" 
-                (change)="onChange()"               
-            >
-                <option
-                    *ngFor="let qt of questionTypes"
-                    [value]="qt.id"
-                >
-                    {{ qt.name }}
-                </option>
-            </select>
-        </div>
-         -->
+         <!-- Fragenpull -->
+         <div 
+         class="form-group"
+     >
+         <label class="col-sm-4 control-label" for="questionsPull">Fragen:</label>
+         <select 
+             class="form-select form-select-lg mb-3" aria-label=".form-select-lg example"
+             formControlName="questionsPull"
+             (change)="onChangePull()"
+         >
+             <option
+                 *ngFor="let qp of questionsPull"
+                 [value]="qp.id"
+             >
+                 {{ qp.name }}: {{ qp.count }} Fragen
+             </option>
+         </select>
+     </div>
 
          <!-- Fragenanzahl -->
         <div 
             class="form-group"
         >
-            <label class="col-sm-4 control-label" for="questionCount">Fragenanzahl:</label>
+            <label class="col-sm-4 control-label" for="questionCount">Anzahl:</label>
             <select 
                 class="form-select form-select-lg mb-3" aria-label=".form-select-lg example"
                 formControlName="questCount"
-                (change)="onChange()"
+                (change)="onChangeCount()"
             >
                 <option
                     *ngFor="let qc of questionCounts"
                     [value]="qc"
                 >
-                    {{ qc }}
+                    {{ qc }} Fragen
                 </option>
             </select>
         </div>
 
         
-        <!-- Seitennummer -->
+        <!-- Seitennummer 
         <div 
         class="form-group"
         >
@@ -63,6 +62,25 @@
                 </option>
             </select>
         </div>
+-->
+        <!-- Seitens -->
+        <div 
+        class="form-group"
+        >
+            <label class="col-sm-4 control-label" for="page">Seiten:</label>
+            <select 
+                class="form-select form-select-lg mb-3" aria-label=".form-select-lg example"
+                formControlName="page"
+            >
+                <option
+                    *ngFor="let p of pages"
+                    [value]="p.num"
+                >
+                    {{ p.name }}
+                </option>
+            </select>
+        </div>
+        
         <!-- Navigation -->
         <div class="d-grid gap-2">
             <button
