@@ -10,7 +10,7 @@ import { QuestionsService } from './services/questions.service';
 import { HttpClientModule } from '@angular/common/http';
 import { SettingsComponent } from './settings/settings.component';
 import { TrainingComponent } from './training/training.component';
-import { PartialExamComponent } from './partial-exam/partial-exam.component';
+import { HalfExamComponent } from './half-exam/half-exam.component';
 import { ExamComponent } from './exam/exam.component';
 
 @NgModule({
@@ -19,7 +19,7 @@ import { ExamComponent } from './exam/exam.component';
     HomeComponent,
     SettingsComponent,
     TrainingComponent,
-    PartialExamComponent,
+    HalfExamComponent,
     ExamComponent
   ],
   imports: [

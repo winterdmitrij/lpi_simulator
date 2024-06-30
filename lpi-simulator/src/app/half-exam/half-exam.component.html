@@ -1,0 +1,129 @@
+<h2 class="text-center"><b>{{ compTitle }}</b></h2>
+
+<!-- Information -->
+<div class="container bg-secondary">
+    <div class="row">
+        <div class="col-md-4">
+            <span><b>Frage: </b>{{ curQuestionNumber + 1 }} / {{ questions.length }}</span>
+        </div>
+        <div 
+          class="col-md-4"
+          [ngClass]="{
+            'incorrect': std > 0
+          }"
+        >
+            <span><b>Timer: </b>{{ std }} : {{ min | number: '2.0' }} : {{ sec | number: '2.0' }}</span>
+        </div>
+        <div class="col-md-4">
+            <span><b>Unbeantwortet: </b>{{ unansweredCount }} / {{ questions.length }}</span>
+        </div>
+    </div>
+</div>
+<hr>
+
+<!-- Fragestellung -->
+<div class="container">
+  <div>
+      <h6><b>Question ID: {{ curQuestion.questionId }}</b></h6>
+  </div>
+  <hr>
+  <div>
+      <pre><b>{{ curQuestion.questionText }}</b></pre>
+  </div>
+</div>
+
+<!-- Antwortbereich -->
+<div class="container">
+  <div *ngFor="let a of curQuestion.answers, let i = index">
+
+      <!-- Multiple-Choice-Frage -->
+      <div class="checkbox" *ngIf="curQuestion.questionTypeId==='MC'">
+
+          <span *ngIf="!exam">
+              <input  type="checkbox" *ngIf="a.givenAnswer" checked (click)="a.givenAnswer=!a.givenAnswer">
+              <input  type="checkbox" *ngIf="!a.givenAnswer" unchecked (click)="a.givenAnswer=!a.givenAnswer">
+              <span> {{ a.answerText }} </span>
+          </span>
+
+          <span *ngIf="exam">
+              <input  type="checkbox" *ngIf="a.givenAnswer" checked (click)="a.givenAnswer=!a.givenAnswer">
+              <input  type="checkbox" *ngIf="!a.givenAnswer" unchecked (click)="a.givenAnswer=!a.givenAnswer">
+              <span *ngIf="a.isCorrect" [ngClass]="{correct:true}"> {{ a.answerText }} </span>
+              <span *ngIf="!a.isCorrect && a.givenAnswer" [ngClass]="{incorrect:true}"> {{ a.answerText }}</span>
+              <span *ngIf="!a.isCorrect && !a.givenAnswer"> {{ a.answerText }}</span>
+          </span>
+      </div>
+
+      <!-- Single-Choice-Frage -->
+      <div class="radio" *ngIf="curQuestion.questionTypeId==='SC'">
+         
+          <span *ngIf="!exam">
+              <input  type="radio" name="a.givenAnswer" *ngIf="a.givenAnswer" checked>
+              <input  type="radio" name="a.givenAnswer" *ngIf="!a.givenAnswer" unchecked (click)="deleteAnswer(); a.givenAnswer=!a.givenAnswer">
+              <span> {{ a.answerText }}</span>
+          </span>
+
+          <span *ngIf="exam">
+              <input  type="radio" name="a.givenAnswer" *ngIf="a.givenAnswer" checked>
+              <input  type="radio" name="a.givenAnswer" *ngIf="!a.givenAnswer" unchecked (click)="deleteAnswer(); a.givenAnswer=!a.givenAnswer">
+              <span *ngIf="a.isCorrect" [ngClass]="{correct:true}"> {{ a.answerText }}</span>
+              <span *ngIf="!a.isCorrect && a.givenAnswer" [ngClass]="{incorrect:true}"> {{ a.answerText }}</span>
+              <span *ngIf="!a.isCorrect && !a.givenAnswer"> {{ a.answerText }}</span>
+          </span>
+      </div>
+  </div>
+</div>
+<br>
+
+<!-- Buttons -->
+<div class="container">
+  <div class="d-grid gap-2">
+    <button 
+        type="button"
+        class="btn btn-outline-primary"
+        (click)="chkAnswer()"
+    >
+        Antwort geben
+    </button>
+    <button 
+        type="button"
+        class="btn btn-outline-primary"
+        *ngIF="unansweredCount !== 0"
+    >
+        Auswerten
+    </button>
+  </div>
+</div>
+<br>
+<hr>
+
+<!-- Navigation -->
+ <div class="container">
+  <nav>
+    <div class="btn-group" role="group" aria-label="Basic outlined example">
+      <button 
+        type="button" 
+        class="btn btn-outline-primary"
+        (click)="toPrev()"
+        [disabled]="curQuestionNumber === 0"
+      >&laquo;</button>
+      <button 
+        type="button" 
+        class="btn btn-outline-primary"
+        *ngFor="let answ of userAnswers; let i = index"
+        [ngClass]="{
+          'active': curQuestionNumber === i,
+          'btn-outline-success': userAnswers[i].isAnswered && userAnswers[i].isCorrect,
+          'btn-outline-danger': userAnswers[i].isAnswered && !userAnswers[i].isCorrect
+        }"
+        (click)="toPage(i)"
+      >{{ i + 1 }}</button>
+      <button 
+        type="button" 
+        class="btn btn-outline-primary"
+        (click)="toNext()"
+        [disabled]="curQuestionNumber === questions.length - 1"
+      >&raquo;</button>
+    </div>
+  </nav>
+ </div>

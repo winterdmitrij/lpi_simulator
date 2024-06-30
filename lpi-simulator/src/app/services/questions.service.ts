@@ -1,6 +1,8 @@
 import { Injectable } from "@angular/core";
 //import { questions as quests} from '../data/questions';
-import { questions as quests} from '../data/mark-questions';
+import { questions as quest1} from '../data/marc-questions';
+import { questions as quest2} from '../data/soeren-questions';
+import { questions as quest3} from '../data/dmitrij-questions';
 import { Question } from '../models/definitions';
 
 
@@ -9,8 +11,10 @@ export class QuestionsService {
     questions: Question[];          // Fragenpull
 
     constructor() {
-        this.questions = quests;    // Fragenpull aus der Datei /models/*.ts erhalten
+        this.questions = quest1;    // Fragenpull aus der Datei /models/*.ts erhalten
     }
+
+
 
 
     /**

@@ -23,7 +23,11 @@
 			<li class="nav-item">
 				<a
 					class="nav-link"	
-					[routerLink]="'/part-exam'"
+					[routerLink]="'/half-exam'"
+					[queryParams]="{
+						count: 10,
+						num: 1
+					}"
 					routerLinkActive="active"
 				>
 					Teilprüfung

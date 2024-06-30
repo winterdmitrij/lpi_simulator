@@ -13,7 +13,7 @@ export class QuestionTypeService {
         // Fragenmengen-Array
         this.questionCounts = [10, 20, 30, 50, 62];
         // Seitennummern-Array
-        this.pageNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+        this.pageNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27]
     }
 
 // Fragenmengen-Array

@@ -1,3 +1,4 @@
+// Frage
 export interface Question {
     questionId: string,
     questionTypeId: string,
@@ -7,7 +8,7 @@ export interface Question {
     help?: string
 }
 
-// Eine der Antworten
+// Antwort der Frage
 export interface Answer {
     answerText: string,     // Antwort: A. Bla-bla-bla
     givenAnswer?: boolean,  // war diese Antwort vom Benutzer als richtige markiert?
@@ -22,7 +23,15 @@ export interface UserAnswer {
     isCorrect: boolean      // wenn ja, war die Antwort richtig
 }
 
+// Fragentyp -- Brauche ich nicht --
 export interface QuestionType {
     name: string,
     id: string
+}
+
+// Fragen-Menge
+export interface QuestionsPul {
+    id: string,     // ID
+    name: string,   // von Sören
+    count: number   // Anzahl von Fragen
 }

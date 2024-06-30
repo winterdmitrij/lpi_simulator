@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { SettingsComponent } from './settings/settings.component';
 import { TrainingComponent } from './training/training.component';
-import { PartialExamComponent } from './partial-exam/partial-exam.component';
+import { HalfExamComponent } from './half-exam/half-exam.component';
 import { ExamComponent } from './exam/exam.component';
 
 const routes: Routes = [
@@ -25,8 +25,8 @@ const routes: Routes = [
     component: TrainingComponent
   },
   {
-    path: 'part-exam',
-    component: PartialExamComponent
+    path: 'half-exam',
+    component: HalfExamComponent
   },
   {
     path: 'exam',

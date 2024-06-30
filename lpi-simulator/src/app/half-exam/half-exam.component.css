@@ -1,0 +1,8 @@
+.incorrect {
+    color: red;
+}
+
+.correct {
+    color: green;
+    font-weight: bold;
+}

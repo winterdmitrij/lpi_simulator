@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,21 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Lern & Prüf Simulator';
+
+  constructor(
+    private router: Router
+  ){}
+
+
+//  toHalfExam(){
+//    this.router.navigate(
+//      ['/half-exam'], // this.curQuestion.questionId],
+//      {
+//        queryParams: {
+//          count: 30,
+//          num: 1
+//        } 
+//      }
+//    );
+//  }
 }

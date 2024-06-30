@@ -1,0 +1,138 @@
+                "Table CUSTOMERS\n"+
+                "Name                 Null?     Type \n"+
+                "-------------------  --------  ------------\n"+
+                "CUST_ID              NOT NULL  NUMBER\n"+
+                "CUST_FIRST_NAME      NOT NULL  VARCHAR2(20)\n"+
+                "CUST_LAST_NAME       NOT NULL  VARCHAR2(40)\n"+
+                "CUST_GENDER          NOT NULL  CHAR(1)\n"+
+                "CUST_YEAR_OF_BIRTH   NOT NULL  NUMBER(4)\n"+
+                "CUST_MARITAL_STATUS            VARCHAR2(20)\n"+
+                "CUST_STREET_ADDRESS  NOT NULL  VARCHAR2(40)\n"+
+                "CUST_POSTAL_CODE     NOT NULL  VARCHAR2(10)\n"+
+                "CUST_CITY            NOT NULL  VARCHAR2(30)\n"+
+                "CUST_STATE_PROVINCE  NOT NULL  VARCHAR2(40)\n"+
+                "COUNTRY_ID           NOT NULL  NUMBER\n"+
+                "CUST_INCOME_LEVEL              VARCHAR2(30)\n"+
+                "CUST_CREDIT_LIMIT              NUMBER\n"+
+                "CUST_EMAIL                     VARCHAR2(30)"
+
+
+                "Table EMPLOYEES\n"+
+                "Name           Null?     Type\n"+
+                "-------------  --------  ------------\n"+
+                "EMPLOYEE_ID    NOT NULL  NUMBER(6)\n"+
+                "FIRST_NAME               VARCHAR2(20)\n"+
+                "LAST_NAME      NOT NULL  VARCHAR2(25)\n"+
+                "EMAIL          NOT NULL  VARCHAR2(25)\n"+
+                "PHONE_NUMBER             VARCHAR2(20)\n"+
+                "HIRE_DATE      NOT NULL  DATE\n"+
+                "JOB_ID         NOT NULL  VARCHAR2(10)\n"+
+                "SALARY                   NUMBER(10,2)\n"+
+                "COMMISSION               NUMBER(6,2)\n"+
+                "MANAGER_ID               NUMBER(6)\n"+
+                "DEPARTMENT_ID            NUMBER(4)\n"+
+
+
+                "Table DEPARTMENTS\n"+
+                "Name             Null?     Type\n"+
+                "---------------  --------  ------------\n"+
+                "DEPARTMENT_ID    NOT NULL  NUMBER(4)\n"+
+                "DEPARTMENT_NAME  NOT NULL  VARCHAR2(30)\n"+
+                "MANAGER_ID                 NUMBER(6)\n"+
+                "LOCATION_ID                NUMBER(4)\n"
+
+
+                "Table STORES\n"+                
+                "Name            Null?  Type\n"+
+                "--------------  -----  ------\n"+
+                "STORE_ID               NUMBER\n"+
+                "NAME                   VARCHAR2(100)\n"+
+                "ADDRESS                VARCHAR2(200)\n"+
+                "CITY                   VARCHAR2(100)\n"+
+                "COUNTRY                VARCHAR2(100)\n"+
+                "START_DATE             DATE\n"+
+                "END_DATE               DATE\n"+
+                "PROPERTY_PRICE         NUMBER\n"+
+
+                "Table SALES1\n"+
+                "Name        Null?  Type\n"+
+                "----------  -----  ------\n"+
+                "SALES_ID           NUMBER\n"+
+                "STORE_ID           NUMBER\n"+
+                "ITEMS_ID           NUMBER\n"+
+                "QUANTITY           NUMBER\n"+
+                "SALES_DATE         DATE\n"+
+
+
+                "Table MEMBERS\n"+
+                "Name        Null?     Type\n"+
+                "----------  --------  -----------\n"+
+                "MEMBER_ID   NOT NULL  VARCHAR2(6)\n"+
+                "FIRST_NAME            VARCHAR2(50)\n"+
+                "LAST_NAME   NOT NULL  VARCHAR2(50)\n"+
+                "ADDRESS               VARCHAR2(50)\n"+
+                "CITY                  VARCHAR2(25)\n"+
+                "STATE                 VARCHAR2(3)\n"+
+
+
+                "Table BOOKS_TRANSACTIONS\n"+
+                "Name            Null?     Type\n"+
+                "--------------  --------  -----------\n"+
+                "TRANSACTION_ID  NOT NULL  VARCHAR2(6)\n"+
+                "BORROWED_DATE             DATE\n"+
+                "DUE_DATE                  DATE\n"+
+                "BOOK_ID                   VARCHAR2(6)\n"+
+                "MEMBER_ID                 VARCHAR2(6)\n"+
+
+                "Table ORDERS\n"+
+                "Name         Null?     Type\n"+
+                "-----------  --------  -----------\n"+
+                "ORDER_ID     NOT NULL  NUMBER(4)\n"+
+                "ORDER_DATE             DATE\n"+
+                "CUSTOMER_ID            NUMBER(3)\n"+
+                "ORDER_TOTAL            NUMBER(7,2)\n"+
+
+
+                "Table INVOICE\n"+
+                "Name      Null?     Type\n"+
+                "--------  --------  ------------\n"+
+                "INV_NO    NOT NULL  NUMBER(3)\n"+
+                "INV_DATE            DATE\n"+
+                "INV_AMT             NUMBER(10,2)\n"+
+
+
+                "Table PRODUCT_INFORMATION\n"+
+                "Name                 Null?     Type\n"+
+                "-------------------  --------  --------------\n"+
+                "PRODUCT_ID           NOT NULL  NUMBER(6)\n"+
+                "PRODUCT_NAME                   VARCHAR2(50)\n"+
+                "PRODUCT_DESCRIPTION            VARCHAR2(2000)\n"+
+                "CATEGORY_ID                    NUMBER(2)\n"+
+                "WEIGHT_CLASS                   NUMBER(1)\n"+
+                "WARRANTY_PERIOD                INTERVALYEAR(2)\n"+
+                "                               TOMONTH\n"+
+                "SUPLIER_ID                     NUMBER(6)\n"+
+                "PRODUCT_STATUS                 VARCHAR2(20)\n"+
+                "LIST_PRICE                     NUMBER(8,2)\n"+
+                "MIN_PRICE                      NUMBER(8,2)\n"+
+                "CATALOG_URL                    VARCHAR2(50)\n"+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
