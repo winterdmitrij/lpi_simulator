@@ -4704,7 +4704,7 @@ export const questions: Question[] = [
     answers: [
       {
         answerText:
-          'A. SELECT SUM(DISTINCT NVL(QUARTER1,O)), MAX(QUARTER1) FROM SALES WHERE QUARTER1 > QUARTER2;',
+          'A. SELECT SUM(DISTINCT NVL(QUARTER1,0)), MAX(QUARTER1) FROM SALES WHERE QUARTER1 > QUARTER2;',
         isCorrect: true,
       },
       {
@@ -4724,7 +4724,7 @@ export const questions: Question[] = [
       },
       {
         answerText:
-          'E. SELECT SUM(DISTINCT NVL2(QUARTER1,O)), MAX(QUARTER1) FROM SALES WHERE QUARTER1 > QUARTER2 FETCH FIRST 5 ROWS WITH TIES;',
+          'E. SELECT SUM(DISTINCT NVL2(QUARTER1,0)), MAX(QUARTER1) FROM SALES WHERE QUARTER1 > QUARTER2 FETCH FIRST 5 ROWS WITH TIES;',
         isCorrect: false,
       },
     ],
@@ -4741,10 +4741,11 @@ export const questions: Question[] = [
       '  EMPLOYEES_ID NUMBER NOT NULL,\n' +
       '  PROJECT_NAME VARCHAR2(50),\n' +
       '  SALARY       NUMBER,\n' +
-      '  COMMISSION   NUMBER\n' +
+      '  COMMISSION   NUMBER);\n' +
+      '\n' +
       'INSERT INTO TABLES\n' +
       '  VALUES (1, DATA,     3200, 1400),\n' +
-      '  VALUES (2, GROWTH,   3050, 2900)\n' +
+      '  VALUES (2, GROWTH,   3050, 2900),\n' +
       '  VALUES (3, STRATEGY, 4800, 2000);\n' +
       '\n' +
       '  Which SQL statement find the 3rd highest salary from the EMPLOYEES table?',
@@ -4892,7 +4893,7 @@ export const questions: Question[] = [
       'You want to display all salaries which starts by 5.\n' +
       'Then, the cities must be returned in ascending order,\n' +
       'with the last names further sorted in descending order.\n' +
-      'Which tow clauses must you add to the query? (choose two.)',
+      'Which two clauses must you add to the query? (choose two.)',
     answers: [
       {
         answerText: 'A. ORDER BY 1, LNAME',
@@ -4989,9 +4990,9 @@ export const questions: Question[] = [
       ' SIZE           NUMBER UNIQUE,\n' +
       ' GDP            NUMBER,\n' +
       ' COUNTRIES_CODE VARCHAR2(2) NOT NULL;\n' +
-      ' RACES LONG)\n' +
-      'CONSTRAINT CDU_RACES_FK REFERENCES POVERTY (RACES),\n' +
-      'CONSTRAINT SIZE_SZ NOT NULL);\n' +
+      ' RACES LONG     CONSTRAINT CDU_RACES_FK \n' +
+      '                REFERENCES POVERTY (RACES),\n' +
+      ' CONSTRAINT SIZE_SZ NOT NULL);\n' +
       '\n' +
       'Which two things must be changed for it to execute successfully? (Choose two.)',
     answers: [
@@ -5616,7 +5617,7 @@ export const questions: Question[] = [
       ' ORDER_ID       NUMBER(8,2) NOT NULL,\n' +
       ' ORDER_NAME     VARCHAR(50) NOT NULL,\n' +
       ' ORDER_CATEGORY VARCHAR(50) NOT NULL,\n' +
-      ' ORDER_COST     NUMBER(8,2) NOT NULL;\n' +
+      ' ORDER_COST     NUMBER(8,2) NOT NULL);\n' +
       '\n' +
       'As a manager, you want a report of unique order costs in each order category.\n' +
       'Which query would achieve the required result?',
@@ -5753,7 +5754,7 @@ export const questions: Question[] = [
       },
       {
         answerText:
-          "C. DELETE FROM CUSTOMERS WHERE CUSTOMERS_ID IN (SELECT CUSTOMERS_ID FROM NEW_CUSTOMERS WHERE name = 'SMITH');",
+          "C. DELETE FROM CUSTOMERS WHERE CUSTOMERS_ID IN (SELECT CUSTOMERS_ID FROM NEW_CUSTOMERS WHERE last_name = 'SMITH');",
         isCorrect: true,
       },
       {
@@ -5977,16 +5978,14 @@ export const questions: Question[] = [
     questionId: '162',
     questionTypeId: 'SC',
     questionText:
-      '1. SELECT count(*) FROM hr.employees\n' +
-      '   WHERE salary > ANY (\n' +
-      '     SELECT salary FROM hr.employees\n' +
-      "     WHERE first_name LIKE Henri%');\n" +
+      '1. SELECT count(*) FROM hr.employees WHERE salary > ANY (\n' +
+      "     SELECT salary FROM hr.employees WHERE first_name LIKE 'Henri%');\n" +
       '\n' +
       '2. SELECT count(*) FROM hr.employees WHERE salary IN (\n' +
-      "     SELECT salary FROM hr.employees WHERE first_name LIKE Henri%');\n" +
+      "     SELECT salary FROM hr.employees WHERE first_name LIKE 'Henri%');\n" +
       '\n' +
       '3. SELECT count(*) FROM hr.employees WHERE salary >= ALL (\n' +
-      "     SELECT salary FROM hr.employees WHERE first_name LIKE Henri%');\n" +
+      "     SELECT salary FROM hr.employees WHERE first_name LIKE 'Henri%');\n" +
       '\n' +
       'Which query answers the following question:\n' +
       'how many people make more than any of the Henri people?',
@@ -6644,7 +6643,7 @@ export const questions: Question[] = [
       '\n' +
       'You execute the SQL statement:\n' +
       '\n' +
-      "SELECT member_id,'', first_name,'', last.name \"ID FIRSTNAME LASTNAME\"\n" +
+      "SELECT member_id '', first_name '', last.name \"ID FIRSTNAME LASTNAME\"\n" +
       'FROM EMPLOYEES;\n' +
       '\n' +
       'What is the outcome?',
@@ -6750,8 +6749,8 @@ export const questions: Question[] = [
       'Evaluate the following two queries:\n' +
       '\n' +
       'SELECT C_LAST_NAME, ORDERS_QTY FROM customers\n' +
-      "WHERE (UPPER(C_LAST_NAME) LIKE 'G%' OR UPPER(C_LAST_NAME) LIKE ~H%'\n" +
-      "   OR UPPER(C_LAST_NAME) LIKE ~l%') AND ORDERS_QTY < 20;\n" +
+      "WHERE (UPPER(C_LAST_NAME) LIKE 'G%' OR UPPER(C_LAST_NAME) LIKE 'H%'\n" +
+      "   OR UPPER(C_LAST_NAME) LIKE 'I%') AND ORDERS_QTY < 20;\n" +
       '\n' +
       'SELECT C_LAST_NAME, ORDERS_QTY FROM customers\n' +
       "WHERE UPPER(C_LAST_NAME) BETWEEN 'G' AND 'I' AND ORDERS_QTY < 20;\n" +
@@ -6815,7 +6814,7 @@ export const questions: Question[] = [
   {
     questionId: '185',
     questionTypeId: 'MC',
-    questionText: 'Wtiich four statements are true about single-row functions?',
+    questionText: 'Which four statements are true about single-row functions?',
     answers: [
       {
         answerText:
@@ -6902,8 +6901,8 @@ export const questions: Question[] = [
       '\n' +
       'INSERT INTO TABLES\n' +
       'VALUES (1, ADAM TRAORE,     555, 03/03/1995, SENEGAL),\n' +
-      'VALUES (2, SERGUEI KRISTOV, 601, 02/01/1991, RUSSIA)\n' +
-      'VALUES (3, ANDREW SORENSEN, 498, 05/051987,  NORWAY);\n' +
+      'VALUES (2, SERGUEI KRISTOV, 601, 02/01/1991, RUSSIA),\n' +
+      'VALUES (3, ANDREW SORENSEN, 498, 05/05/1987, NORWAY);\n' +
       '\n' +
       "Which SQL query update the athletes' names by removing leading and trailing spaces?",
     answers: [

@@ -33,6 +33,16 @@
                 "DEPARTMENT_ID            NUMBER(4)\n"+
 
 
+                   "Table JOB_HISTORY\n"+
+                   "Name           Null?     Type\n"+
+                   "-------------  --------  ------------\n"+
+                   "EMPLOYEE_ID    NOT NULL  NUMBER(6)\n"+
+                   "START_DATE     NOT NULL  DATE\n"+
+                   "END_DATE       NOT NULL  DATE\n"+
+                   "JOB_ID         NOT NULL  VARCHAR2(10)\n"+
+                   "DEPARTMEND_ID            NUMBER(4)\n"+
+
+
                 "Table DEPARTMENTS\n"+
                 "Name             Null?     Type\n"+
                 "---------------  --------  ------------\n"+
@@ -54,7 +64,8 @@
                 "END_DATE               DATE\n"+
                 "PROPERTY_PRICE         NUMBER\n"+
 
-                "Table SALES1\n"+
+
+                "Table SALES\n"+
                 "Name        Null?  Type\n"+
                 "----------  -----  ------\n"+
                 "SALES_ID           NUMBER\n"+
@@ -62,6 +73,28 @@
                 "ITEMS_ID           NUMBER\n"+
                 "QUANTITY           NUMBER\n"+
                 "SALES_DATE         DATE\n"+
+
+
+                "Table SALES\n"+
+                "Name        Null?  Type\n"+
+                "----------  -----  ------\n"+
+                "PROD_ID        NOT NULL  NUMBER\n"+
+                "CUST_ID        NOT NULL  NUMBER\n"+
+                "TIME_ID        NOT NULL  DATE\n"+
+                "CHANNEL_ID     NOT NULL  NUMBER\n"+
+                "PROMO_ID       NOT NULL  NUMBER\n"+
+                "QUANTITY_SOLD  NOT NULL  NUMBER(10,2)\n"+
+
+
+                "Table STORES\n"+                
+                "Name            Null?     Type\n"+
+                "-------------  --------  ------\n"+
+                "PROD_ID        NOT NULL  NUMBER\n"+
+                "CUST_ID        NOT NULL  NUMBER\n"+
+                "TIME_ID        NOT NULL  DATE\n"+
+                "CHANEL_ID      NOT NULL  NUMBER\n"+
+                "PROMO_ID       NOT NULL  NUMBER\n"+
+                "QUANTITY_SOLD  NOT NULL  NUMBER(10,2)\n"+
 
 
                 "Table MEMBERS\n"+
@@ -89,8 +122,42 @@
                 "-----------  --------  -----------\n"+
                 "ORDER_ID     NOT NULL  NUMBER(4)\n"+
                 "ORDER_DATE             DATE\n"+
+                "ORDER_MODE             VARCHAR2(8)\n"+
                 "CUSTOMER_ID            NUMBER(3)\n"+
                 "ORDER_TOTAL            NUMBER(7,2)\n"+
+
+
+                "Table ORDERS\n"+
+                "Name         Null?     Type\n"+
+                "-----------  --------  -----------\n"+
+                "ORDER_ID     NOT NULL  NUMBER(12)\n"+
+                "ORDER_DATE   NOT NULL  TIMESTAMP\n"+
+                "ORDER_STATUS           NUMBER(2)\n"+
+                "CUSTOMER_ID  NOT NULL  NUMBER(6)\n"+
+                "ORDER_TOTAL            NUMBER(8,2)\n"+
+
+
+                "Table ORDERS\n"+
+                "Name         Null?     Type\n"+
+                "-----------  --------  -----------\n"+
+                "ORDER_ID     NOT NULL  NUMBER(4)\n"+
+                "ORDER_DATE   NOT NULL  TIMISTAM(6)\n"+
+                "                       WTHLOCALTIMEZONE\n"+
+                "ORDER_MODE             VARCHAR2(8)\n"+
+                "CUSTOMER_ID  NOT NULL  NUMBER(6)\n"+
+                "ORDER_TOTAL            NUMBER(7,2)\n"+
+                "SALES_REP_ID           NUMBER(6)\n"+
+                "PROMOTION_ID           NUMBER(6)\n"+
+
+
+                "Table ORDER_ITEMS\n"+
+                "Name          Null?     Type\n"+
+                "------------  --------  -----------\n"+
+                "ORDER_ID      NOT NULL  NUMBER(12)\n"+
+                "LINE_ITEM_ID  NOT NULL  NUMBER(3)\n"+
+                "PRODUCT_ID    NOT NULL  NUMBER(6)\n"+
+                "UNIT_PRICE              NUMBER(8,2)\n"+
+                "QUANTITY                NUMBER(8)\n"+
 
 
                 "Table INVOICE\n"+
@@ -118,11 +185,102 @@
                 "CATALOG_URL                    VARCHAR2(50)\n"+
 
 
+                "Table PRODUCTS\n"+
+                "Name                  Null?     Type\n"+
+                "--------------------  --------  --------------\n"+
+                "PROD_ID               NOT NULL  NUMBER(6)\n"+
+                "PROD_NAME             NOT NULL  VARCHAR2(50)\n"+
+                "PROD_DESC             NOT NULL  VARCHAR2(2000)\n"+
+                "PROD_CATEGORY         NOT NULL  VARCHAR2(50)\n"+
+                "PROD_CATEGORY_ID      NOT NULL  NUMBER(2)\n"+
+                "PROD_UNIT_OF_MEASURE  NOT NULL  VARCHAR2(20)\n"+
+                "SUPLIER_ID            NOT NULL  NUMBER(6)\n"+
+                "PROD_STATUS           NOT NULL  VARCHAR2(20)\n"+
+                "PROD_LIST_PRICE       NOT NULL  NUMBER(8,2)\n"+
+                "PROD_MIN_PRICE        NOT NULL  NUMBER(8,2)\n"+
 
 
+                "Table TIMES\n"+
+                "Name                 Null?     Type\n"+
+                "---------------------  --------  --------------\n"+
+                "TIME_ID                NOT NULL  NUMBER(6)\n"+
+                "DAY_NAME               NOT NULL  VARCHAR2(50)\n"+
+                "DAY_NUMBER_IN_MONTH    NOT NULL  NUMBER(2)\n"+
+                "CALENDER_WEEK_NUMBER   NOT NULL  NUMBER(2)\n"+
+                "CALENDER_MONTH_NUMBER  NOT NULL  NUMBER(2)\n"+
+                "CALENDER_MONTH_NAME    NOT NULL  VARCHAR2(20)\n"+
+                "CALENDER_YEAR          NOT NULL  NUMBER(4)\n"+
+
+'Table TRANSACTIONS\n' +
+      'Name               Null?     Type\n' +
+      '-----------------  --------  ----------------------\n' +
+      'TRANS_ID           NOT NULL  NUMBER(6)\n' +
+      'CUST_NAME          NOT NULL  VARCHAR2(20)\n' +
+      'CUST_STATUS        NOT NULL  VARCHAR2\n' +
+      'TRANS_DATE         NOT NULL  DATE\n' +
+      'TRANS_VALIDITY               INTERVAL DAY OF SECOND\n' +
+      'CUST_CREDIT_VALUE            NUMBER(10)\n' +
 
 
+                "Table STUDENT\n"+
+                "Name          Null?     Type\n"+
+                "------------  --------  ------------\n"+
+                "STUDENT_ID    NOT NULL  NUMBER(2)\n"+
+                "STUDENT_NAME            VARCHAR2(20)\n"+
+                "FACULTY_ID              VARCHAR2(2)\n"+
+                "LOCATION_ID             NUMBER(2)\n"+
 
+
+                "Table FACULTY\n"+
+                "Name          Null?     Type\n"+
+                "------------  --------  -----------\n"+
+                "FACULTY_ID    NOT NULL  NUMBER(2)\n"+
+                "FACULTY_NAME            VARCHAR2(20)\n"+
+                "LOCATION_ID             NUMBER(2)\n"+
+
+                   "Table COSTS\n"+
+                   "Name        Null?     Type\n"+
+                   "----------  --------  ------------\n"+
+                   "PROD_ID     NOT NULL  NUMBER\n"+
+                   "TIME_ID     NOT NULL  DATE\n"+
+                   "PROMO_ID    NOT NULL  NUMBER\n"+
+                   "CHANNEL_ID  NOT NULL  NUMBER\n"+
+                   "UNIT_COST   NOT NULL  NUMBER(10,2)\n"+
+                   "UNIT_PRICE  NOT NULL  NUMBER(10,2)\n"+
+
+
+                   "Table PROMOTIONS\n"+
+                   "Name                  Null?     Type\n"+
+                   "--------------------  --------  ------------\n"+
+                   "PROMO_ID              NOT NULL  NUMBER(6)\n"+
+                   "PROMO_NAME            NOT NULL  VARCHAR2(30)\n"+
+                   "PROMO_SUBCATEGORY     NOT NULL  VARCHAR2(30)\n"+
+                   "PROMO_SUBCATEGORY_ID  NOT NULL  NUMBER\n"+
+                   "PROMO_CATEGORY        NOT NULL  VARCHAR2(30)\n"+
+                   "PROMO_CATEGORY_ID     NOT NULL  NUMBER\n"+
+                   "PROMO_COST            NOT NULL  NUMBER(10,2)\n"+
+                   "PROMO_BEGIN_DATE      NOT NULL  DATE\n"+
+                   "PROMO_END_DATE        NOT NULL  DATE\n"+
+
+
+                   "Table PROGRAMS\n"+
+                   "Name        Null?     Type\n"+
+                   "----------  --------  -----------\n"+
+                   "PROG_ID     NOT NULL  NUMBER(3)\n"+
+                   "PROG_COST             NUMBER(8.2)\n"+
+                   "START_DATE  NOT NULL  DATE\n"+
+                   "END_DATE              DATE\n"+
+
+
+                   "Table CHANNELS\n"+
+                   "Name              Null?     Type\n"+
+                   "----------------  --------  ------------\n"+
+                   "CHANNEL_ID        NOT NULL  NUMBER\n"+
+                   "CHANNEL_DESC      NOT NULL  VARCHAR2(20)\n"+
+                   "CHANNEL_CLASS     NOT NULL  VARCHAR2(20)\n"+
+                   "CHANNEL_CLASS_ID  NOT NULL  NUMBER\n"+
+                   "CHANNEL_TOTAL     NOT NULL  VARCHAR2(13)"+
+                   "CHANNEL_TOTAL_ID  NOT NULL  NUMBER\n"+
 
 
 
